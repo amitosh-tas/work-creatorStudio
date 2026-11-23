@@ -3,8 +3,6 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Footer, Pricing, Testimonials } from "../components/home/Enrollment"
-import "./Home.css"
-import "./Landing.css"
 
 export default function Home() {
   return (

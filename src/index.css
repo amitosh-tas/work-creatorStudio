@@ -2,8 +2,68 @@
 
 @theme {
   --font-poppins: "Poppins", system-ui, sans-serif;
-}
+  --color-canvas: #fdfdfd;
+  --color-ink: #101010;
+  --color-muted: #5f6368;
+  --color-slate-copy: #666e76;
+  --color-card-copy: #62616a;
+  --color-brand: #ffdb51;
+  --color-brand-action: #f5ca18;
+  --color-brand-step: #ffd247;
+  --color-brand-ink: #413200;
+  --color-gold-ink: #765400;
+  --color-ocean: #075475;
+  --color-focus: #0877a3;
+  --color-mist: #f6fafb;
+  --color-sand: #f8f2e0;
+  --color-cream: #f8f6ef;
+  --color-soft-border: #e9e9e9;
+  --color-control-border: #bbb;
+  --color-warm-border: #f0e8cc;
+  --color-pinterest: #d50a29;
+  --color-youtube: #d90000;
 
-html {
-  scroll-behavior: smooth;
+  --container-landing: 85.625rem;
+  --container-hero: 86.25rem;
+  --container-hero-stack: 40.625rem;
+  --container-stat-strip: 78.75rem;
+  --container-feature-grid: 68.75rem;
+  --container-comparison: 71.25rem;
+  --container-timeline: 56.25rem;
+  --container-section-copy: 49.375rem;
+
+  --radius-panel: 1.875rem;
+  --radius-action: 1.25rem;
+  --radius-control: .625rem;
+  --radius-inset: 1.625rem;
+  --shadow-panel: 0 1px 15px #0003;
+  --shadow-comparison: 0 6px 28px #0001;
+  --shadow-stat-strip: 0 0 5px 1px #0007;
+  --shadow-step: 0 8px 20px #d4a51e36;
+  --tracking-heading: -.035em;
+  --leading-display: 1.1;
+  --leading-heading: 1.12;
+  --leading-feature: 1.22;
+  --leading-compact: 1.32;
+  --leading-card-copy: 1.4;
+  --leading-section-copy: 1.7;
+
+  --text-section-title: clamp(1.6rem, 2vw, 2.05rem);
+  --text-feature-title: clamp(1.5rem, 2vw, 2.25rem);
+  --text-hero-title: clamp(2.25rem, 3vw, 3.5rem);
+  --text-faq-title: clamp(2rem, 3.3vw, 3.5rem);
+  --text-stat: clamp(1.65rem, 2.2vw, 2.5rem);
+  --text-section-label: 1.2rem;
+  --text-section-copy: 1.1rem;
+  --text-product-copy: .94rem;
+
+  --background-image-course-action: linear-gradient(100deg, #f5ca18 65%, #ffdf61);
+  --background-image-faq-banner: url("/assets/asset%2093.webp");
+  --background-image-instagram: linear-gradient(35deg, #e58111, #a21169 62%, #5939b9);
+  --animate-accordion-answer: accordion-answer 200ms ease-out;
+
+  @keyframes accordion-answer {
+    from { opacity: .45; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }

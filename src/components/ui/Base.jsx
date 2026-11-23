@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar"
 function Base() {
   return (
     <div
-    className="min-h-dvh font-poppins">
+    className="min-h-dvh bg-canvas font-poppins text-ink">
       <Sidebar />
 
       

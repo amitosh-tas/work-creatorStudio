@@ -4,7 +4,7 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
 
 if (!reducedMotion.matches && "IntersectionObserver" in window) {
   const targets = document.querySelectorAll(
-    ".landing-section .section-heading, .landing-card, .business-steps li, .instructor-photo, .curriculum-photo",
+    "[data-reveal]",
   )
   const running = new Set()
   const observer = new IntersectionObserver((entries) => {
