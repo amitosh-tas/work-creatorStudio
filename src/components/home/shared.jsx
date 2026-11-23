@@ -3,7 +3,7 @@ export const featureSplit = "grid items-start gap-5.5 md:grid-cols-2 md:gap-9"
 export const featureTitle = "text-feature-title leading-feature font-bold tracking-heading"
 export const focusOutline = "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-focus"
 export const courseButton = "inline-flex min-h-14.5 min-w-47.5 items-center justify-center border-2 px-5 py-2.5 text-center font-semibold text-ink"
-export const goldButton = "rounded-action border-transparent bg-course-action"
+export const goldButton = "relative isolate overflow-hidden rounded-action border-transparent bg-course-action motion-safe:before:pointer-events-none motion-safe:before:absolute motion-safe:before:inset-y-0 motion-safe:before:left-0 motion-safe:before:-z-10 motion-safe:before:w-1/3 motion-safe:before:animate-join-shimmer motion-safe:before:bg-join-shimmer"
 
 const sectionTones = {
   blue: "bg-mist",

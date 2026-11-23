@@ -58,9 +58,16 @@
   --text-product-copy: .94rem;
 
   --background-image-course-action: linear-gradient(100deg, #f5ca18 65%, #ffdf61);
+  --background-image-join-shimmer: linear-gradient(105deg, transparent 5%, #fff7 50%, transparent 95%);
   --background-image-faq-banner: url("/assets/asset%2093.webp");
   --background-image-instagram: linear-gradient(35deg, #e58111, #a21169 62%, #5939b9);
   --animate-accordion-answer: accordion-answer 200ms ease-out;
+  --animate-join-shimmer: join-shimmer 2.2s ease-in-out 350ms infinite both;
+
+  @keyframes join-shimmer {
+    0% { transform: translateX(-110%); }
+    58%, 100% { transform: translateX(320%); }
+  }
 
   @keyframes accordion-answer {
     from { opacity: .45; transform: translateY(-3px); }
