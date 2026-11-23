@@ -29,14 +29,14 @@ export function CourseOverview() {
         ))}
       </div>
       <SectionHeading label="What You’ll Learn" title="A Simpler Way to Build a Digital Product Business" />
-      <div className="grid items-center gap-5.5 md:grid-cols-2 md:gap-7.5 lg:flex">
+      <div className="grid items-center gap-5.5 md:gap-7.5 lg:flex">
         <div className="min-w-0 rounded-2xl border border-control-border bg-white px-5 pt-6 pb-7.5 lg:flex-100">
           <h3 className={featureTitle}>Turn Your Ideas into Digital Products That Generate Income</h3>
           <p className="mt-5 mb-7 leading-card-copy">Learn the skills, systems, and strategies needed to create and sell successful digital products online. Whether you’re a complete beginner or looking for a structured roadmap, this course will guide you through every stage of building and growing your digital product business.</p>
           <CourseLink />
         </div>
-        <img className="aspect-28/25 w-full max-w-xs justify-self-center self-end object-contain object-bottom md:max-w-none lg:min-w-0 lg:flex-115" src={asset(13, "webp")} alt="Mohan Singh pointing to the course outcomes" loading="lazy" />
-        <ul className="grid gap-4.5 pb-10.5 md:col-span-2 md:grid-cols-2 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">
+        <img className="hidden aspect-28/25 w-full self-end object-contain object-bottom lg:block lg:min-w-0 lg:flex-115" src={asset(13, "webp")} alt="Mohan Singh pointing to the course outcomes" loading="lazy" />
+        <ul className="grid gap-4.5 pb-10.5 md:grid-cols-2 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">
           {outcomes.map(outcome => (
             <li className="flex min-h-19 items-center gap-3 rounded-lg border border-neutral-800 px-3.5 py-2.5 hover:bg-brand motion-safe:transition-colors motion-safe:duration-200" key={outcome}>
               <img className="shrink-0" src={asset(84)} alt="" width="42" height="42" loading="lazy" />
