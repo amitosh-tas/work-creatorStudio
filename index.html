@@ -34,6 +34,33 @@
         }
       })
 
+      document.addEventListener("click", (event) => {
+        const play = event.target.closest("[data-testimonial-play]")
+        if (!play || play.hidden) return
+
+        const video = play.parentElement.querySelector("video")
+        const controller = new AbortController()
+        const restorePoster = () => {
+          if (controller.signal.aborted) return
+          const hadFocus = document.activeElement === video
+          controller.abort()
+          video.hidden = true
+          video.removeAttribute("src")
+          video.load()
+          play.hidden = false
+          if (hadFocus) play.focus({ preventScroll: true })
+        }
+
+        video.addEventListener("error", restorePoster, { once: true, signal: controller.signal })
+        video.hidden = false
+        if (document.activeElement === play) video.focus({ preventScroll: true })
+        play.hidden = true
+        video.src = video.dataset.src
+        video.play().catch((error) => {
+          if (error.name !== "NotAllowedError") restorePoster()
+        })
+      })
+
       if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
         addEventListener("scroll", () => {
           const motionSource = "/src/landing-motion.js"

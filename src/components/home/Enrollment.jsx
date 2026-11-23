@@ -2,7 +2,15 @@ import { asset } from "../../utils/asset"
 import { Accordion, courseButton, CourseLink, featureSplit, focusOutline, goldButton, Section, SectionHeading } from "./shared"
 
 const pricingHighlights = [[85, "Lifetime access"], [86, "Beginner Friendly"], [87, "No Coding Required"]]
-const testimonials = [1, 2, 3, 4, 5, 6]
+const testimonials = [
+  { image: 1, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2a6115d119f1993ac7c213.mp4" },
+  { image: 2 },
+  { image: 3 },
+  { image: 4 },
+  { image: 5 },
+  { image: 6 },
+]
+const testimonialPlay = "absolute top-1/2 left-1/2 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5"
 const pricingCard = "rounded-lg border border-control-border p-5"
 const socialIcon = "grid size-9 place-items-center rounded-full font-bold text-white"
 
@@ -33,10 +41,17 @@ export function Testimonials() {
     <Section id="testimonials">
       <SectionHeading label="Success Stories" title="Real Sales. Real Experience." description="Discover real success stories, sales results, and practical insights from the journey of building and growing a digital product business." />
       <div className="mx-auto grid max-w-feature-grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-7">
-        {testimonials.map(image => (
+        {testimonials.map(({ image, video }) => (
           <div className="relative aspect-3/4 overflow-hidden rounded-control bg-neutral-200" key={image}>
             <img className="size-full object-cover" src={`/assets/testimonial-${image}.webp`} alt={`Student testimonial ${image} poster`} width="540" height="720" loading="lazy" />
-            <span className="absolute top-1/2 left-1/2 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5" aria-hidden="true">▶</span>
+            {video ? (
+              <>
+                <button type="button" data-testimonial-play aria-label={`Play student testimonial ${image}`} className={`${testimonialPlay} cursor-pointer ${focusOutline}`}>▶</button>
+                <video hidden controls playsInline preload="none" tabIndex={0} data-src={video} aria-label={`Student testimonial ${image}`} className="absolute inset-0 size-full object-cover" />
+              </>
+            ) : (
+              <span className={testimonialPlay} aria-hidden="true">▶</span>
+            )}
           </div>
         ))}
       </div>
