@@ -36,7 +36,14 @@ export function CourseOverview() {
           <CourseLink />
         </div>
         <img className="aspect-28/25 w-full max-w-xs justify-self-center self-end object-contain object-bottom md:max-w-none lg:min-w-0 lg:flex-115" src={asset(13, "webp")} alt="Mohan Singh pointing to the course outcomes" loading="lazy" />
-        <ul className="grid gap-4.5 pb-10.5 md:col-span-2 md:grid-cols-2 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">{outcomes.map(outcome => <li className="flex min-h-19 items-center gap-3 rounded-lg border border-neutral-800 px-3.5 py-2.5" key={outcome}><img className="shrink-0" src={asset(84)} alt="" width="42" height="42" loading="lazy" />{outcome}</li>)}</ul>
+        <ul className="grid gap-4.5 pb-10.5 md:col-span-2 md:grid-cols-2 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">
+          {outcomes.map(outcome => (
+            <li className="flex min-h-19 items-center gap-3 rounded-lg border border-neutral-800 px-3.5 py-2.5 hover:bg-brand motion-safe:transition-colors motion-safe:duration-200" key={outcome}>
+              <img className="shrink-0" src={asset(84)} alt="" width="42" height="42" loading="lazy" />
+              {outcome}
+            </li>
+          ))}
+        </ul>
       </div>
     </Section>
   )

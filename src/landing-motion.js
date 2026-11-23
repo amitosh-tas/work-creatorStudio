@@ -3,19 +3,31 @@ import { animate } from "motion/mini"
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
 
 if (!reducedMotion.matches && "IntersectionObserver" in window) {
-  const targets = document.querySelectorAll(
-    "[data-reveal]",
-  )
+  const targets = document.querySelectorAll("[data-reveal]")
   const running = new Set()
+  const stepStagger = 140
+  let nextStepStart = 0
+
   const observer = new IntersectionObserver((entries) => {
+    const now = performance.now()
+
     for (const entry of entries) {
       if (!entry.isIntersecting) continue
-      observer.unobserve(entry.target)
+      const target = entry.target
+      observer.unobserve(target)
+
+      const isStep = target.dataset.reveal === "step"
+      let delay = 0
+      if (isStep) {
+        const start = Math.max(now, nextStepStart)
+        delay = (start - now) / 1000
+        nextStepStart = start + stepStagger
+      }
 
       const animation = animate(
-        entry.target,
-        { opacity: [0.82, 1], transform: ["translateY(10px)", "translateY(0px)"] },
-        { duration: 0.36, ease: [0.22, 1, 0.36, 1] },
+        target,
+        { opacity: [isStep ? 0 : 0.82, 1], transform: [isStep ? "translateY(22px)" : "translateY(10px)", "translateY(0px)"] },
+        { delay, duration: isStep ? 0.45 : 0.36, ease: [0.22, 1, 0.36, 1] },
       )
       running.add(animation)
       animation.then(() => running.delete(animation))

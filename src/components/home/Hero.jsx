@@ -21,7 +21,7 @@ function CountUp({ value, prefix = "", suffix = "+" }) {
 export default function Hero() {
   return (
     <section className="relative isolate min-h-dvh border-t border-black bg-canvas px-4.5 pt-11 pb-16 text-black sm:px-6 lg:min-h-214 lg:pt-17.5 lg:pb-29.5" id="home">
-      <img className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full object-cover object-top lg:h-19/20 lg:object-fill" src="/assets/heroBg.webp" alt="" />
+      <img className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full object-cover object-top lg:h-19/20 lg:object-cover" src="/assets/heroBg.webp" alt="" />
       <div className="mx-auto grid max-w-hero-stack items-center gap-8 lg:flex lg:max-w-hero lg:gap-16 xl:gap-24 2xl:gap-29">
         <div className="min-w-0 lg:flex-117">
           <p className="inline-flex items-center gap-4 rounded-full border-2 border-warm-border py-0.75 pr-1.25 pl-4 text-sm text-gold-ink lg:ml-1.5">

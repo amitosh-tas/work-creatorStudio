@@ -53,7 +53,7 @@ export function BusinessModel() {
         <SectionHeading pill label="The Business Model" title="How This Business Actually Works" description="Six simple steps. Once a product is live, the same file can sell while you sleep." />
         <ol className="mx-auto mb-13.5 grid max-w-timeline gap-8">
           {steps.map(([title, description], index) => (
-            <li data-reveal className="relative flex min-h-24 gap-6.25 after:absolute after:top-16 after:-bottom-8 after:left-8 after:w-px after:bg-brand-action/45 last:after:hidden" key={title}>
+            <li data-reveal="step" className="relative flex min-h-24 gap-6.25 after:absolute after:top-16 after:-bottom-8 after:left-8 after:w-px after:bg-brand-action/45 last:after:hidden" key={title}>
               <div className="grid size-16 shrink-0 place-items-center rounded-inset bg-brand-step shadow-step"><img src={asset(34 + index)} width="28" height="28" alt="" loading="lazy" /></div>
               <div><p className="text-sm font-bold text-gold-ink uppercase">Step {index + 1}</p><h3 className="my-1 font-semibold">{title}</h3><p className="text-muted">{description}</p></div>
             </li>
