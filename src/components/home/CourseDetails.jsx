@@ -60,16 +60,16 @@ export function Instructor() {
 
 const modules = [
   ["Introduction: Welcome to the Course", "Welcome to AI Digital Products Mastery. In this introductory lesson, discover how digital products can become a scalable source of passive income, what you’ll learn throughout the course, and the roadmap we’ll follow to build your online business."],
-  ["What Are Digital Products?", "Explore common downloadable products and how they’re sold on Etsy."],
-  ["Module 1: Create Your Etsy Account", "Walk through opening your account and setting up an Etsy shop."],
-  ["Module 2: Scale to Passive Income", "Learn how reusable digital files and automatic delivery support more sales."],
-  ["Module 3: Finding Winning Products", "Research shopper demand and identify promising product ideas."],
-  ["Module 4: AI Product Creation", "Use AI and Canva to create your downloadable products."],
-  ["Module 5: Etsy Listing System", "Build your listings with titles, tags, and product images."],
-  ["Module 6: Your First 10 Sales", "Plan the first steps after publishing your listings."],
-  ["Module 7: The New Digital Products Opportunity", "Explore ways to expand your digital product range."],
-  ["1 Bonus – Etsy Account Setup Checklist (India 2026)", "A checklist for setting up an Etsy account in India."],
-  ["2 Bonus – Done-for-You Digital Products Pack", "A pack of digital products to explore as you build your shop."],
+  ["What Are Digital Products?", "Understand the fundamentals of digital products, why they're one of the most profitable online business models, and how you can create once and sell repeatedly without inventory, shipping, or physical products."],
+  ["Module 1: Create Your Etsy Account", "Set up your Etsy seller account step by step, connect your payment methods, configure your shop settings, and prepare your store to start selling digital products worldwide."],
+  ["Module 2: Scale to Passive Income", "Discover how to grow your digital product business using automation, product bundles, Pinterest marketing, Instagram traffic, repeat customers, and email marketing."],
+  ["Module 3: Finding Winning Products", "Learn how to identify profitable digital product ideas through Etsy research, evergreen niches, customer demand, and proven product validation strategies."],
+  ["Module 4: AI Product Creation", "Master the process of creating high-quality digital products using ChatGPT, Canva, AI prompts, templates, and an efficient production system that saves time."],
+  ["Module 5: Etsy Listing System", "Learn how to optimize your product listings with powerful titles, SEO-friendly tags, compelling thumbnails, and persuasive descriptions that attract buyers."],
+  ["Module 6: Your First 10 Sales", "Implement proven launch strategies, pricing techniques, and consistency habits designed to help you achieve your first Etsy sales with confidence."],
+  ["Module 7: The New Digital Products Opportunity", "Discover why AI-powered digital products are transforming online businesses and learn why this opportunity is perfect for beginners looking to build long-term passive income."],
+  ["1 Bonus – Etsy Account Setup Checklist (India 2026)", "Access a complete checklist covering all the documents, payment setup, Payoneer configuration, banking details, and verification requirements needed to start selling from India."],
+  ["2 Bonus – Done-for-You Digital Products Pack", "Kickstart your journey with five ready-to-launch digital products that you can customize, upload, and start selling immediately while saving hours of design work."],
 ]
 
 export function Curriculum() {

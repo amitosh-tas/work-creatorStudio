@@ -12,7 +12,11 @@ const testimonials = [
 ]
 const testimonialPlay = "absolute top-1/2 left-1/2 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5"
 const pricingCard = "rounded-lg border border-control-border p-5"
-const socialIcon = "grid size-9 place-items-center rounded-full font-bold text-white"
+const socialProfiles = [
+  { name: "Pinterest", href: "https://in.pinterest.com/EtsyCreatorstudio99/", icon: "pinterest-p", badge: "bg-pinterest", size: "h-6 w-4.5" },
+  { name: "Instagram", href: "https://www.instagram.com/creators_studio99/", icon: "instagram", badge: "bg-instagram", size: "size-5.5" },
+  { name: "YouTube", href: "https://www.youtube.com/@creatorsstudio99", icon: "youtube", badge: "bg-youtube", size: "h-5 w-6.5" },
+]
 
 export function Pricing() {
   return (
@@ -61,10 +65,10 @@ export function Testimonials() {
 
 const faqs = [
   ["Do I need any experience?", "No. The course is designed for complete beginners."],
-  ["Do I need design skills?", "The course walks through creating digital products with beginner-friendly tools like Canva and AI."],
-  ["How much investment is required?", "The course starts at ₹699. The digital product model shown above can be started for under ₹1,000."],
-  ["Is this a get-rich-quick scheme?", "Building a shop takes time, practice, and consistent effort. Income is not guaranteed."],
-  ["Can students take this course?", "Yes. The course is self-paced and suitable for students."],
+  ["Do I need design skills?", "No. You'll learn practical workflows and how AI tools can assist."],
+  ["How much investment is required?", "The business model is designed to be low-cost compared to many traditional businesses."],
+  ["Is this a get-rich-quick scheme?", "No. This course focuses on learning a practical skill and implementing a proven process."],
+  ["Can students take this course?", "Yes. The training is beginner-friendly and suitable for learners from different backgrounds."],
 ]
 
 export function FAQ() {
@@ -88,11 +92,13 @@ export function Footer() {
   return (
     <footer className="grid justify-items-center gap-6 bg-black px-6 pt-12 pb-7.5 text-center text-white">
       <a href="#home" className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></a>
-      <div className="flex gap-6" aria-label="Social platforms">
-        <span className={`${socialIcon} bg-pinterest font-serif text-2xl italic`} role="img" aria-label="Pinterest">p</span>
-        <span className={`${socialIcon} bg-instagram text-xl`} role="img" aria-label="Instagram">◎</span>
-        <span className={`${socialIcon} bg-youtube text-sm`} role="img" aria-label="YouTube">▶</span>
-      </div>
+      <nav className="flex gap-6" aria-label="Social platforms">
+        {socialProfiles.map(({ name, href, icon, badge, size }) => (
+          <a key={name} href={href} aria-label={name} className={`grid size-9 place-items-center rounded-full ${badge} ${focusOutline}`}>
+            <img src={`/assets/social-${icon}.svg`} alt="" className={`${size} object-contain invert`} loading="lazy" />
+          </a>
+        ))}
+      </nav>
       <p className="max-w-280 text-sm">© 2026 <strong className="font-medium text-brand">Tech Arch Softwares Pvt. Ltd.</strong> All Rights Reserved. This course and all associated materials are protected by copyright law and may not be copied, shared, reproduced, distributed, or resold without prior written consent.</p>
     </footer>
   )
