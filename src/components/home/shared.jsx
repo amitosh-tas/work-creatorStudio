@@ -46,8 +46,8 @@ export function CourseLink({ lesson = false, className = "" }) {
 
 export function CheckItem({ children, negative = false }) {
   return (
-    <li className="flex items-baseline gap-2">
-      <span aria-hidden="true" className={`inline-grid size-4 shrink-0 place-items-center rounded-full text-xs leading-none ${negative ? "bg-red-700 text-white" : "bg-brand text-brand-ink"}`}>
+    <li className="flex items-start gap-2 leading-6">
+      <span aria-hidden="true" className={`mt-1 flex size-4 shrink-0 items-center justify-center rounded-full text-xs leading-none ${negative ? "bg-red-700 text-white" : "bg-brand text-brand-ink"}`}>
         {negative ? "×" : "✓"}
       </span>
       {children}
