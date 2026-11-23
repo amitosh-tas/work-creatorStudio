@@ -19,7 +19,7 @@ export function CourseOverview() {
   return (
     <Section id="about" tone="blue" flushBottom>
       <SectionHeading label="Why This Course" title="Looking for a Practical Way to Build an Additional Income Stream?" description="Many online income opportunities seem appealing at first, but they often come with challenges that make it difficult for beginners to get started and stay consistent." />
-      <div className="mb-8 grid grid-cols-2 gap-3.5 md:mb-19.5 md:gap-5 lg:grid-cols-4">
+      <div className="mb-8 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:mb-19.5 md:gap-5 lg:grid-cols-4">
         {challenges.map(([title, description], index) => (
           <article data-reveal className="rounded-2xl bg-white px-3.75 py-7 text-center shadow-panel lg:min-h-77.5" key={title}>
             <img className="mx-auto mb-4.5 size-17.5" src={asset(9 + index)} width="70" height="70" alt="" loading="lazy" />

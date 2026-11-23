@@ -35,6 +35,23 @@
       })
 
       document.addEventListener("click", (event) => {
+        const menu = document.getElementById("mobile-menu")
+        if (event.target.closest("[data-mobile-menu-open]")) {
+          menu.showModal()
+          document.documentElement.classList.add("overflow-hidden")
+          menu.addEventListener("close", () => {
+            document.documentElement.classList.remove("overflow-hidden")
+          }, { once: true })
+        } else if (menu?.open && menu.contains(event.target) && event.target.closest("[data-mobile-menu-close], a")) {
+          menu.close()
+        }
+      })
+
+      matchMedia("(min-width: 48rem)").addEventListener("change", (event) => {
+        if (event.matches) document.getElementById("mobile-menu")?.close()
+      })
+
+      document.addEventListener("click", (event) => {
         const play = event.target.closest("[data-testimonial-play]")
         if (!play || play.hidden) return
 

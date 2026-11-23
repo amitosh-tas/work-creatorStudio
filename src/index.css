@@ -40,6 +40,9 @@
   --shadow-comparison: 0 6px 28px #0001;
   --shadow-stat-strip: 0 0 5px 1px #0007;
   --shadow-step: 0 8px 20px #d4a51e36;
+  --shadow-offer: 0 -2px 8px #0004;
+  --spacing-mobile-offer: calc(.75rem + env(safe-area-inset-bottom, 0px));
+  --spacing-mobile-page: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   --tracking-heading: -.035em;
   --leading-display: 1.1;
   --leading-heading: 1.12;
