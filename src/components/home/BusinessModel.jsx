@@ -23,21 +23,21 @@ const businessRows = [
 ]
 
 export function ComparisonTable({ headings, rows, className = "", course = false }) {
-  const cell = "border-b border-black/5 px-1.75 py-2.5 wrap-anywhere text-sm leading-normal md:px-4.5 md:py-3.25 md:text-base"
+  const cellClasses = "border-b border-black/5 px-1.75 py-2.5 wrap-anywhere text-sm leading-normal md:px-4.5 md:py-3.25 md:text-base"
   const courseColumn = "w-1/4 text-center md:w-1/5"
   return (
     <div className={`mx-auto max-w-comparison overflow-hidden rounded-inset bg-white shadow-comparison ${className}`}>
       <table className="w-full border-collapse text-left">
         <thead className={course ? "text-gold-ink uppercase" : "bg-gray-100"}>
           <tr>{headings.map((heading, index) => (
-            <th scope="col" className={`${cell} ${course ? (index > 0 ? courseColumn : "") : "last:bg-brand"}`} key={heading}>{heading}</th>
+            <th scope="col" className={`${cellClasses} ${course ? (index > 0 ? courseColumn : "") : "last:bg-brand"}`} key={heading}>{heading}</th>
           ))}</tr>
         </thead>
         <tbody>
           {rows.map(([label, ...cells]) => (
             <tr className={course ? "even:bg-cream" : ""} key={label}>
-              <th scope="row" className={`${cell} ${course ? "font-normal" : "w-1/4 md:w-auto"}`}>{label}</th>
-              {cells.map((cell, index) => <td className={`${cell} ${course ? courseColumn : "last:bg-cream last:text-gold-ink"}`} key={index}>{cell}</td>)}
+              <th scope="row" className={`${cellClasses} ${course ? "font-normal" : "w-1/4 md:w-auto"}`}>{label}</th>
+              {cells.map((cell, index) => <td className={`${cellClasses} ${course ? courseColumn : "last:bg-cream last:text-gold-ink"}`} key={index}>{cell}</td>)}
             </tr>
           ))}
         </tbody>
