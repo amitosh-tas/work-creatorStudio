@@ -9,9 +9,17 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        home: path.resolve(import.meta.dirname, "index.html"),
+        landingMotion: path.resolve(import.meta.dirname, "src/landing-motion.js"),
+      },
+    },
+  },
   resolve:{
     alias:{
-      "@": path.resolve(__dirname, "./src")
+      "@": path.resolve(import.meta.dirname, "./src")
     }
   }
 })

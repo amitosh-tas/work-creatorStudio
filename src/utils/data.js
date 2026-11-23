@@ -1,11 +1,7 @@
-
-
-
 export const SidebarData = [
-  { label: "Home" , path: "#home" },
-  { label: "About" , path: "#home" },
-  { label: "Pricing" , path: "#home" },
-  { label: "Testimonials" , path: "#home" },
-  { label: "FAQ's" , path: "#home" },
-  { label: "Refund Policy" , path: "#home" },
-] 
+  { label: "Home", path: "#home" },
+  { label: "About", path: "#about" },
+  { label: "Pricing", path: "#pricing" },
+  { label: "Testimonials", path: "#testimonials" },
+  { label: "FAQ's", path: "#faq" },
+]

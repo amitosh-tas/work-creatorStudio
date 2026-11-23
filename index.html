@@ -2,17 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>creatorstudio</title>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="description" content="Learn how to create digital products with AI and Canva and sell them on Etsy with Creator Studio’s beginner-friendly course." />
+    <link rel="icon" type="image/webp" href="/assets/logo.webp" />
+    <title>Creator Studio | Create and Sell Digital Products on Etsy</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      customElements.define("hero-count", class extends HTMLElement {
+        connectedCallback() {
+          const reduced = matchMedia("(prefers-reduced-motion: reduce)")
+          if (reduced.matches) return
+
+          const target = Number(this.dataset.value)
+          const digits = this.lastElementChild
+          const format = new Intl.NumberFormat("en-US")
+          digits.textContent = "0"
+          let start
+          const tick = (now) => {
+            if (!this.isConnected) return
+            start ??= now
+            const t = reduced.matches ? 1 : Math.min((now - start) / 1300, 1)
+            const value = Math.floor(target * (1 - (1 - t) ** 2))
+            const text = format.format(value)
+            if (digits.textContent !== text) digits.textContent = text
+            if (t < 1) requestAnimationFrame(tick)
+          }
+          requestAnimationFrame(tick)
+        }
+      })
+
+      if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+        addEventListener("scroll", () => {
+          const motionSource = "/src/landing-motion.js"
+          import(motionSource).catch(() => {})
+        }, { once: true, passive: true })
+      }
+    </script>
   </body>
 </html>

@@ -1,8 +1,27 @@
+import Hero from "../components/home/Hero"
+import { CourseOverview, ProductExamples } from "../components/home/CourseOverview"
+import { BusinessModel } from "../components/home/BusinessModel"
+import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
+import { FAQ, Footer, Pricing, Testimonials } from "../components/home/Enrollment"
+import "./Home.css"
+import "./Landing.css"
 
-function Home() {
+export default function Home() {
   return (
-    <div>Home</div>
+    <>
+      <main>
+        <Hero />
+        <CourseOverview />
+        <ProductExamples />
+        <BusinessModel />
+        <CourseFit />
+        <Instructor />
+        <Curriculum />
+        <Pricing />
+        <Testimonials />
+        <FAQ />
+      </main>
+      <Footer />
+    </>
   )
 }
-
-export default Home
