@@ -4,11 +4,11 @@ import { Accordion, courseButton, CourseLink, featureSplit, focusOutline, goldBu
 const pricingHighlights = [[85, "Lifetime access"], [86, "Beginner Friendly"], [87, "No Coding Required"]]
 const testimonials = [
   { image: 1, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2a6115d119f1993ac7c213.mp4" },
-  { image: 2 },
-  { image: 3 },
-  { image: 4 },
-  { image: 5 },
-  { image: 6 },
+  { image: 2, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2a61152719d8cb18bb749f.mp4" },
+  { image: 3, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2a6115d119f1993ac7c21c.mp4" },
+  { image: 4, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2a61152719d8cb18bb7499.mp4" },
+  { image: 5, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2f8567d7e5b817778f38c1.mp4" },
+  { image: 6, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a4257813a7f0c54687dbac8.mp4" },
 ]
 const testimonialPlay = "absolute top-1/2 left-1/2 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5"
 const pricingCard = "rounded-lg border border-control-border p-5"
