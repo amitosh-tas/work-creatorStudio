@@ -14,6 +14,7 @@ export default defineConfig({
       input: {
         home: path.resolve(import.meta.dirname, "index.html"),
         landingMotion: path.resolve(import.meta.dirname, "src/landing-motion.js"),
+        heroVideo: path.resolve(import.meta.dirname, "src/hero-video.js"),
       },
     },
   },

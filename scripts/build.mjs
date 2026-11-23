@@ -5,9 +5,12 @@ const bundle = await build()
 const motion = bundle.output.find(
   file => file.type === "chunk" && file.isEntry && file.name === "landingMotion",
 )
+const heroVideo = bundle.output.find(
+  file => file.type === "chunk" && file.isEntry && file.name === "heroVideo",
+)
 
-if (!motion) {
-  throw new Error("The deferred motion entry is missing from the Vite output.")
+if (!motion || !heroVideo) {
+  throw new Error("A landing page entry is missing from the Vite output.")
 }
 
 const vite = await createServer({
@@ -25,11 +28,12 @@ try {
     throw new Error("The home page mount point is missing from the Vite output.")
   }
 
-  // Keep the deferred motion loader while dropping React's client entry.
+  // Keep the landing page enhancements while dropping React's client entry.
   const page = template
     .replace(/<script type="module"[^>]*><\/script>\s*/g, "")
     .replace("/src/landing-motion.js", `/${motion.fileName}`)
     .replace(root, () => `<div id="root">${renderHome()}</div>`)
+    .replace("</body>", `  <script type="module" src="/${heroVideo.fileName}"></script>\n  </body>`)
 
   await writeFile(output, page)
 } finally {

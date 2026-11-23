@@ -1,4 +1,5 @@
 import { asset } from "../../utils/asset"
+import HLSPlayer from "./HLSPlayer"
 import { CourseLink } from "./shared"
 
 const stats = [
@@ -43,20 +44,13 @@ export default function Hero() {
           </div>
         </div>
         <div className="relative min-w-0 lg:max-w-144.75 lg:flex-100">
-          <div className="relative aspect-video bg-neutral-900" role="img" aria-label="Course introduction video placeholder">
-            <img
-              className="block h-auto w-full"
-              src="/assets/hero-poster-768.webp"
-              srcSet="/assets/hero-poster-480.webp 480w, /assets/hero-poster-768.webp 768w"
-              sizes="(max-width: 680px) calc(100vw - 36px), (max-width: 900px) 650px, (max-width: 1400px) 42vw, 579px"
-              alt=""
-              width="768"
-              height="432"
-              fetchPriority="high"
-            />
-            <span className="absolute top-1/2 left-1/2 grid h-11.5 w-16.5 -translate-1/2 place-items-center rounded-control bg-black/55 after:border-y-8 after:border-l-14 after:border-y-transparent after:border-l-white" aria-hidden="true" />
-          </div>
-          <div className="absolute right-3 bottom-3 grid justify-items-center gap-0.75 rounded-sm bg-black px-2 py-1 text-xs text-white sm:px-3.25 sm:pt-1.5 sm:pb-2.75 sm:text-sm lg:top-11/24 lg:right-auto lg:bottom-auto lg:-left-25">
+          <HLSPlayer
+            src="https://content.apisystem.tech/hls/medias/vjZH6eaaO1YqAx3rpmKk/media/transcoded_videos/cts-a31c99b6633f71d9_,360,480,720,1080,p.mp4.urlset/master.m3u8"
+            poster="/assets/hero-poster-768.webp"
+            posterSet="/assets/hero-poster-480.webp 480w, /assets/hero-poster-768.webp 768w"
+            posterSizes="(max-width: 680px) calc(100vw - 36px), (max-width: 900px) 650px, (max-width: 1400px) 42vw, 579px"
+          />
+          <div className="pointer-events-none absolute right-3 bottom-3 z-20 grid justify-items-center gap-0.75 rounded-sm bg-black px-2 py-1 text-xs text-white peer-data-playing:top-3 peer-data-playing:right-auto peer-data-playing:bottom-auto peer-data-playing:left-3 sm:px-3.25 sm:pt-1.5 sm:pb-2.75 sm:text-sm lg:top-11/24 lg:right-auto lg:bottom-auto lg:-left-25 lg:peer-data-playing:top-11/24 lg:peer-data-playing:-left-25">
             <strong className="text-base text-brand sm:text-2xl"><CountUp value={1500} /></strong>
             <span>Digital Sales Generated</span>
           </div>
