@@ -3,18 +3,11 @@ import { CourseLink, focusOutline, landingContainer } from "../home/shared"
 
 const navLink = `${focusOutline} hover:text-brand motion-safe:transition-colors motion-safe:duration-150`
 
-function NavigationItems({ isHome }) {
+function NavigationItems() {
   return (
     <>
       {SidebarData.map(({ label, path }) => (
-        <a
-          className={navLink}
-          key={label}
-          href={!isHome && path.startsWith("#") ? `/${path}` : path}
-          aria-current={!isHome && path === "/refund-policy/" ? "page" : undefined}
-        >
-          {label}
-        </a>
+        <a className={navLink} key={label} href={path}>{label}</a>
       ))}
     </>
   )
@@ -34,11 +27,15 @@ export function MobileOffer({ className = "" }) {
   )
 }
 
-export default function Sidebar({ isHome }) {
+function handleLogin() {
+  window.location.href = "https://course.creatorstudio99.com/login";
+}
+
+export default function Sidebar() {
   return (
     <header className="sticky top-0 z-40 bg-black px-4 text-white md:px-6">
       <div className={`${landingContainer} flex min-h-22 items-center justify-between gap-4 md:min-h-25.5 md:gap-6`}>
-        <a href={isHome ? "#home" : "/#home"} className={`shrink-0 ${focusOutline}`}>
+        <a href="#home" className={`shrink-0 ${focusOutline}`}>
           <img className="block h-16 w-36 object-contain md:h-auto md:w-33.75" src="/assets/logo.webp" alt="Creator Studio, home" width="135" height="67" />
         </a>
         <button
@@ -56,8 +53,9 @@ export default function Sidebar({ isHome }) {
           </span>
         </button>
         <nav className="hidden flex-wrap justify-center gap-x-6 gap-y-2.5 font-medium md:flex" aria-label="Main navigation">
-          <NavigationItems isHome={isHome} />
+          <NavigationItems />
         </nav>
+        <LoginButton className={"hidden md:flex w-max"}/>
       </div>
 
       <dialog id="mobile-menu" aria-label="Mobile menu" className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-black text-white md:hidden">
@@ -66,11 +64,23 @@ export default function Sidebar({ isHome }) {
             <span aria-hidden="true">×</span>
           </button>
           <nav className="flex flex-1 flex-col items-center gap-6 px-4 pt-6 pb-8 text-center text-lg font-semibold" aria-label="Mobile navigation">
-            <NavigationItems isHome={isHome} />
+            <NavigationItems />
+            <LoginButton className={"w-full"}/>
           </nav>
-          {isHome && <MobileOffer className="sticky bottom-0" />}
+          <MobileOffer className="sticky bottom-0" />
         </div>
       </dialog>
     </header>
+  )
+}
+
+function LoginButton( {className} ){
+  return (
+    <button
+    onClick={handleLogin}
+    className={`
+      ${className}
+      rounded-full bg-brand px-6 py-3.5 font-medium text-ink cursor-pointer
+      `} type="button" >Log in</button>
   )
 }
