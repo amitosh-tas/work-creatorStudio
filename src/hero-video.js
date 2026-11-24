@@ -12,11 +12,11 @@ class HeroHLSPlayer extends HTMLElement {
 
   #onPlay = (event) => {
     if (event.target.closest("[data-play]") && !this.#session) {
-      this.#start()
+      this.#start(event.detail === 0)
     }
   }
 
-  async #start() {
+  async #start(keyboardActivation) {
     const video = this.querySelector("video")
     const quality = this.querySelector("select")
     const poster = this.querySelector("[data-poster]")
@@ -25,11 +25,12 @@ class HeroHLSPlayer extends HTMLElement {
     const source = this.dataset.src
     const controller = new AbortController()
     const { signal } = controller
-    const session = { controller, video, hls: null, timeout: null }
+    const session = { controller, video, hls: null, timeout: null, revealed: false }
     this.#session = session
     status.textContent = "Loading video…"
     play.setAttribute("aria-disabled", "true")
     video.preload = "auto"
+    video.hidden = false
 
     const fail = (message = "The video couldn’t load. Select Play to retry.") => {
       if (signal.aborted) return
@@ -40,9 +41,10 @@ class HeroHLSPlayer extends HTMLElement {
     }
 
     const revealVideo = () => {
+      if (signal.aborted || session.revealed) return
       clearTimeout(session.timeout)
-      video.hidden = false
-      if (document.activeElement === play) video.focus({ preventScroll: true })
+      session.revealed = true
+      if (keyboardActivation && document.activeElement === play) video.focus({ preventScroll: true })
       poster.hidden = true
       this.setAttribute("data-playing", "")
       quality.hidden = quality.options.length < 3
@@ -52,7 +54,8 @@ class HeroHLSPlayer extends HTMLElement {
     const beginPlayback = () => {
       video.play().catch((error) => {
         // The native controls remain available if the browser blocks autoplay.
-        if (error.name !== "NotAllowedError" && error.name !== "AbortError") fail()
+        if (error.name === "NotAllowedError") revealVideo()
+        else if (error.name !== "AbortError") fail()
       })
     }
 
@@ -105,7 +108,7 @@ class HeroHLSPlayer extends HTMLElement {
 
       hls.on(Hls.Events.ERROR, (_event, { fatal }) => {
         if (!fatal) return
-        if (supportsNative && video.hidden) {
+        if (supportsNative && !session.revealed) {
           session.hls = null
           hls.destroy()
           quality.options.length = 1

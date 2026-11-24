@@ -53,10 +53,18 @@
 
       document.addEventListener("click", (event) => {
         const play = event.target.closest("[data-testimonial-play]")
-        if (!play || play.hidden) return
+        if (!play || play.hidden || play.hasAttribute("aria-disabled")) return
 
         const video = play.parentElement.querySelector("video")
+        const poster = play.parentElement.querySelector("[data-testimonial-poster]")
+        const keyboardActivation = event.detail === 0
         const controller = new AbortController()
+        const revealVideo = () => {
+          if (controller.signal.aborted) return
+          if (keyboardActivation && document.activeElement === play) video.focus({ preventScroll: true })
+          poster.hidden = true
+          play.hidden = true
+        }
         const restorePoster = () => {
           if (controller.signal.aborted) return
           const hadFocus = document.activeElement === video
@@ -64,17 +72,20 @@
           video.hidden = true
           video.removeAttribute("src")
           video.load()
+          poster.hidden = false
           play.hidden = false
+          play.removeAttribute("aria-disabled")
           if (hadFocus) play.focus({ preventScroll: true })
         }
 
         video.addEventListener("error", restorePoster, { once: true, signal: controller.signal })
+        video.addEventListener("loadeddata", revealVideo, { once: true, signal: controller.signal })
+        play.setAttribute("aria-disabled", "true")
         video.hidden = false
-        if (document.activeElement === play) video.focus({ preventScroll: true })
-        play.hidden = true
         video.src = video.dataset.src
         video.play().catch((error) => {
-          if (error.name !== "NotAllowedError") restorePoster()
+          if (error.name === "NotAllowedError") revealVideo()
+          else restorePoster()
         })
       })
 

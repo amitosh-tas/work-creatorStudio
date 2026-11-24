@@ -10,7 +10,7 @@ const testimonials = [
   { image: 5, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a2f8567d7e5b817778f38c1.mp4" },
   { image: 6, video: "https://assets.cdn.filesafe.space/vjZH6eaaO1YqAx3rpmKk/media/6a4257813a7f0c54687dbac8.mp4" },
 ]
-const testimonialPlay = "absolute top-1/2 left-1/2 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5"
+const testimonialPlay = "absolute top-1/2 left-1/2 z-20 grid size-12 -translate-1/2 place-items-center rounded-full border-2 border-white bg-black/50 text-white md:size-16.5"
 const pricingCard = "rounded-lg border border-control-border p-5"
 const socialProfiles = [
   { name: "Pinterest", href: "https://in.pinterest.com/EtsyCreatorstudio99/", icon: "pinterest-p", badge: "bg-pinterest", size: "h-6 w-4.5" },
@@ -47,7 +47,7 @@ export function Testimonials() {
       <div className="mx-auto grid max-w-feature-grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-7">
         {testimonials.map(({ image, video }) => (
           <div className="relative aspect-3/4 overflow-hidden rounded-control bg-neutral-200" key={image}>
-            <img className="size-full object-cover" src={`/assets/testimonial-${image}.webp`} alt={`Student testimonial ${image} poster`} width="540" height="720" loading="lazy" />
+            <img data-testimonial-poster className="pointer-events-none relative z-10 size-full object-cover" src={`/assets/testimonial-${image}.webp`} alt={`Student testimonial ${image} poster`} width="540" height="720" loading="lazy" />
             {video ? (
               <>
                 <button type="button" data-testimonial-play aria-label={`Play student testimonial ${image}`} className={`${testimonialPlay} cursor-pointer ${focusOutline}`}>▶</button>

@@ -3,7 +3,7 @@ import { focusOutline } from "./shared"
 export default function HLSPlayer({ src, poster, posterSet, posterSizes }) {
   return (
     <hero-hls-player data-src={src} className="peer relative block aspect-video bg-neutral-900 data-playing:z-10">
-      <div data-poster>
+      <div data-poster className="relative z-10">
         <img
           className="block h-auto w-full"
           src={poster}
@@ -25,7 +25,7 @@ export default function HLSPlayer({ src, poster, posterSet, posterSizes }) {
       <select hidden aria-label="Video quality" className={`absolute top-2 right-2 rounded-md bg-black/80 px-2 py-1 text-sm text-white ${focusOutline}`}>
         <option value="-1">Auto</option>
       </select>
-      <p data-video-status role="status" className="pointer-events-none absolute inset-x-2 top-2 mx-auto w-fit rounded-md bg-black/80 px-2 py-1 text-center text-sm text-white empty:hidden" />
+      <p data-video-status role="status" className="pointer-events-none absolute inset-x-2 top-2 z-20 mx-auto w-fit rounded-md bg-black/80 px-2 py-1 text-center text-sm text-white empty:hidden" />
     </hero-hls-player>
   )
 }
