@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 export const landingContainer = "mx-auto w-full max-w-landing"
 export const featureSplit = "grid items-start gap-5.5 md:grid-cols-2 md:gap-9"
 export const featureTitle = "text-feature-title leading-feature font-bold tracking-heading"
@@ -36,6 +38,7 @@ export function SectionHeading({ label, title, description, pill = false, align 
 }
 
 export function CourseLink({ lesson = false, className = "" }) {
+  const [checkoutMessage, setCheckoutMessage] = useState("")
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
 
@@ -54,9 +57,30 @@ export function CourseLink({ lesson = false, className = "" }) {
   }
 
   return (
-    <Link className={classes} to="/#pricing">
-      Join Now
-    </Link>
+    <>
+      <button
+        type="button"
+        className={`cursor-pointer ${classes}`}
+        aria-haspopup="dialog"
+        onClick={(event) => {
+          const checkout = document.getElementById("razorpay-checkout")
+          const paymentButton = checkout?.querySelector(".razorpay-payment-button .PaymentButton, button, input[type='submit']")
+          if (!paymentButton) {
+            setCheckoutMessage(checkout?.dataset.loadFailed
+              ? "Checkout couldn’t load. Refresh the page to try again."
+              : "Checkout is loading. Please try again in a moment.")
+            return
+          }
+
+          setCheckoutMessage("")
+          event.currentTarget.closest("dialog")?.close()
+          paymentButton.click()
+        }}
+      >
+        Join Now
+      </button>
+      {checkoutMessage && <span role="status" className="block text-sm text-muted">{checkoutMessage}</span>}
+    </>
   )
 }
 
@@ -87,4 +111,3 @@ export function Accordion({ items, group }) {
     </div>
   )
 }
-import { Link } from "react-router-dom"

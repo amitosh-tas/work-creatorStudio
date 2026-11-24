@@ -1,6 +1,7 @@
+import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { asset } from "../../utils/asset"
-import { Accordion, courseButton, CourseLink, featureSplit, focusOutline, goldButton, Section, SectionHeading } from "./shared"
+import { Accordion, CourseLink, featureSplit, focusOutline, Section, SectionHeading } from "./shared"
 
 const pricingHighlights = [[85, "Lifetime access"], [86, "Beginner Friendly"], [87, "No Coding Required"]]
 const testimonials = [
@@ -19,6 +20,32 @@ const socialProfiles = [
   { name: "YouTube", href: "https://www.youtube.com/@creatorsstudio99", icon: "youtube", badge: "bg-youtube", size: "h-5 w-6.5" },
 ]
 
+export function RazorpayCheckout() {
+  const container = useRef(null)
+
+  useEffect(() => {
+    const host = container.current
+    const form = document.createElement("form")
+    const script = document.createElement("script")
+    script.src = "https://checkout.razorpay.com/v1/payment-button.js"
+    script.setAttribute("data-payment_button_id", "pl_RLoGpzRlA3An1p")
+    script.async = true
+    script.onerror = () => {
+      host.dataset.loadFailed = "true"
+    }
+    host.append(form)
+    form.append(script)
+
+    return () => {
+      script.onerror = null
+      delete host.dataset.loadFailed
+      form.remove()
+    }
+  }, [])
+
+  return <div id="razorpay-checkout" ref={container} hidden />
+}
+
 export function Pricing() {
   return (
     <Section id="pricing">
@@ -33,7 +60,7 @@ export function Pricing() {
           <p className="text-muted">Join the course and learn how to create, launch, and grow a digital product business using beginner-friendly tools like Canva and AI.</p>
           <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
             <strong className="text-xl">Starting at ₹699/-</strong>
-            <button className={`${courseButton} ${goldButton}`} type="button" disabled>Join Now</button>
+            <CourseLink />
           </div>
         </div>
       </div>

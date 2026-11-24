@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Outlet, useLocation, useMatch } from "react-router-dom"
 import Sidebar, { MobileOffer } from "./Sidebar"
-import { Footer } from "../home/Enrollment"
+import { Footer, RazorpayCheckout } from "../home/Enrollment"
 
 function Base() {
   const isHome = Boolean(useMatch("/"))
@@ -31,6 +31,7 @@ function Base() {
       </div>
       <Footer />
       {isHome && <MobileOffer className="fixed inset-x-0 bottom-0 z-30" />}
+      <RazorpayCheckout />
     </div>
   )
 }
