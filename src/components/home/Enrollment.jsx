@@ -78,7 +78,7 @@ export function FAQ() {
       <div className={featureSplit}>
         <div>
           <SectionHeading align="left" label="FAQ’s" title={<>Frequently<br />Asked Questions</>} description="Find answers to the most common questions about the course, Etsy selling, and getting started." />
-          <div className="grid min-h-61.25 content-center justify-items-center gap-9 rounded-xl bg-black bg-faq-banner bg-cover bg-center bg-no-repeat p-7 text-center text-white">
+          <div className="grid min-h-62 content-center items-center justify-items-center gap-5 rounded-xl bg-black bg-faq-banner bg-contain bg-center bg-no-repeat p-7 pt-11  text-center text-white">
             <h3 className="max-w-141 text-xl leading-snug font-bold">Ready to Learn a Practical Skill That Can Help You Build an Additional Income Stream?</h3>
             <CourseLink />
           </div>
