@@ -74,7 +74,7 @@ const modules = [
 
 export function Curriculum() {
   return (
-    <Section id="free-lesson">
+    <Section id="free-lesson" className="max-md:pb-3">
       <SectionHeading label="A Roadmap For Success" title="The Complete Digital Product Roadmap for Beginners" />
       <div className={featureSplit}>
         <Accordion items={modules} group="curriculum" />

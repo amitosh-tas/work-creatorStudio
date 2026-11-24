@@ -14,7 +14,7 @@ const sectionTones = {
 }
 
 export function Section({ id, tone, children, className = "", flushBottom = false }) {
-  const spacing = flushBottom ? "pt-12.5 lg:pt-17" : "py-12.5 lg:py-17"
+  const spacing = flushBottom ? "pt-12.5 lg:pt-17" : "pt-12.5 pb-6 md:pb-12.5 lg:py-17"
   return (
     <section id={id} className={`px-4 md:px-6 ${spacing} ${sectionTones[tone] ?? ""} ${className}`}>
       <div className={landingContainer}>{children}</div>
@@ -29,7 +29,7 @@ export function Pill({ children }) {
 export function SectionHeading({ label, title, description, pill = false, align = "center" }) {
   const left = align === "left"
   return (
-    <header data-reveal className={left ? "mb-3 text-left" : "mx-auto mb-8 text-center md:mb-12"}>
+    <header data-reveal className={left ? "mb-3 text-center md:text-left" : "mx-auto mb-8 text-center md:mb-12"}>
       {label && (pill ? <Pill>{label}</Pill> : <p className="mb-4.5 text-section-label font-bold text-ocean">{label}</p>)}
       <h2 className={`leading-heading font-bold tracking-heading ${left ? "text-faq-title" : "text-section-title"}`}>{title}</h2>
       {description && <p className={`mx-auto mt-5 max-w-section-copy leading-section-copy ${left ? "text-base" : "text-base text-muted md:text-section-copy"}`}>{description}</p>}

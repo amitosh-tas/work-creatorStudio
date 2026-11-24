@@ -64,18 +64,23 @@ const products = [
 
 export function ProductExamples() {
   return (
-    <Section tone="gold">
+    <Section tone="gold" className="max-md:pb-3">
       <SectionHeading pill label="Start Here" title="What Exactly Are Digital Products?" description="A digital product is a file a customer downloads instantly. You create it once and sell the same file unlimited times." />
-      <div className="grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-x-5 md:gap-y-6.5 lg:grid-cols-5">
+      <div
+        aria-label="Digital product examples"
+        role="region"
+        tabIndex={0}
+        className="grid gap-3.5 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus max-md:-mx-4 max-md:auto-cols-[44%] max-md:grid-flow-col max-md:snap-x max-md:snap-proximity max-md:overflow-x-auto max-md:scroll-px-4 max-md:px-4 max-md:py-3 md:grid-cols-3 md:gap-x-5 md:gap-y-6.5 lg:grid-cols-5"
+      >
         {products.map(([image, title, description, extension = "jpeg"]) => (
-          <article data-reveal className="rounded-2xl bg-white px-2.75 pt-2.5 pb-5.5 shadow-panel md:rounded-panel" key={title}>
+          <article data-reveal className="rounded-2xl bg-white px-2.75 pt-2.5 pb-5.5 shadow-panel max-md:snap-start md:rounded-panel" key={title}>
             <img className="aspect-square w-full rounded-xl object-cover md:rounded-inset" src={asset(image, extension)} alt="" loading="lazy" />
             <h3 className="mt-3 font-bold">{title}</h3>
             <p className="mt-3 text-product-copy leading-card-copy text-card-copy">{description}</p>
           </article>
         ))}
       </div>
-      <div className="mt-12 text-center"><CourseLink lesson /></div>
+      <div className="mt-6 text-center md:mt-12"><CourseLink lesson /></div>
     </Section>
   )
 }

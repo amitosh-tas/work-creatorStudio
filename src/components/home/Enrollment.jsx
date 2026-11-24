@@ -53,7 +53,7 @@ export function Pricing() {
       <div className="grid gap-5.5 md:grid-cols-3 md:gap-9.5">
         <div className={pricingCard}>
           <h3 className="mb-2.5 text-center text-section-label font-bold">Course Highlights</h3>
-          <ul className="grid gap-3.5 py-2.5 text-muted">{pricingHighlights.map(([icon, title]) => <li className="flex items-center gap-3" key={title}><img src={asset(icon)} alt="" width="28" height="28" loading="lazy" />{title}</li>)}</ul>
+          <ul className="grid gap-3.5 py-2.5 text-muted max-md:mx-auto max-md:w-fit">{pricingHighlights.map(([icon, title]) => <li className="flex items-center gap-3" key={title}><img src={asset(icon)} alt="" width="28" height="28" loading="lazy" />{title}</li>)}</ul>
         </div>
         <div className={`${pricingCard} md:col-span-2`}>
           <h3 className="mb-2.5 text-3xl font-bold tracking-heading">Description</h3>
