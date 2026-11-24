@@ -50,7 +50,7 @@ export default function Hero() {
             posterSet="/assets/hero-poster-480.webp 480w, /assets/hero-poster-768.webp 768w"
             posterSizes="(max-width: 680px) calc(100vw - 36px), (max-width: 900px) 650px, (max-width: 1400px) 42vw, 579px"
           />
-          <div className="pointer-events-none absolute right-3 bottom-3 z-20 hidden justify-items-center gap-0.75 rounded-sm bg-black px-2 py-1 text-xs text-white peer-data-playing:top-3 peer-data-playing:right-auto peer-data-playing:bottom-auto peer-data-playing:left-3 peer-data-playing:grid sm:px-3.25 sm:pt-1.5 sm:pb-2.75 sm:text-sm md:grid lg:top-11/24 lg:right-auto lg:bottom-auto lg:-left-25 lg:peer-data-playing:top-11/24 lg:peer-data-playing:-left-25">
+          <div className="pointer-events-none absolute right-3 bottom-3 z-20 hidden justify-items-center gap-0.75 rounded-sm bg-black px-2 py-1 text-xs text-white peer-data-playing:top-3 peer-data-playing:right-auto peer-data-playing:bottom-auto peer-data-playing:left-3 sm:px-3.25 sm:pt-1.5 sm:pb-2.75 sm:text-sm md:grid lg:top-11/24 lg:right-auto lg:bottom-auto lg:-left-25 lg:peer-data-playing:top-11/24 lg:peer-data-playing:-left-25">
             <strong className="text-base text-brand sm:text-2xl"><CountUp value={1500} /></strong>
             <span>Digital Sales Generated</span>
           </div>
