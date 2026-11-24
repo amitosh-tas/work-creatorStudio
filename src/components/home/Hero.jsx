@@ -21,7 +21,7 @@ function CountUp({ value, prefix = "", suffix = "+" }) {
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-[calc(100dvh-5.5rem-var(--spacing-mobile-page))] flex-col justify-center border-t border-black bg-canvas px-4.5 pt-2.5 pb-12 text-black sm:px-6 md:min-h-[calc(100dvh-6.375rem)] md:pt-11 md:pb-16 lg:py-16" id="home">
+    <section className="relative isolate flex min-h-[calc(100dvh-5.5rem-var(--spacing-mobile-page))] flex-col justify-center border-t border-black bg-canvas px-4.5 pt-2.5 pb-6 text-black sm:px-6 md:min-h-[calc(100dvh-6.375rem)] md:pt-11 md:pb-16 lg:py-16" id="home">
       <img className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full object-cover object-top" src="/assets/heroBg.webp" alt="" />
       <div className="mx-auto grid w-full max-w-hero-stack items-center gap-8 lg:flex lg:max-w-hero xl:gap-12 2xl:gap-28">
         <div className="min-w-0 text-center md:text-left lg:flex-117">
@@ -29,11 +29,11 @@ export default function Hero() {
             <img className="shrink-0" src={asset(1)} width="22" height="22" alt="" />
             Beginner-friendly AI + Etsy system
           </p>
-          <h1 className="mt-2.25 text-2xl leading-display font-semibold tracking-heading sm:text-3xl md:text-hero-title">
+          <h1 className="mt-2.25 text-3xl leading-display font-semibold tracking-heading max-md:text-balance md:text-hero-title">
             Create &amp; Sell Digital<br className="hidden 2xl:inline" /> Products on Etsy Using AI
             <span className="block text-brand">Even If You're Starting<br className="hidden 2xl:inline" /> From Zero</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-157.5 text-sm leading-compact text-slate-copy sm:text-base md:mx-0 md:mt-2.5">
+          <p className="mx-auto mt-5 max-w-157.5 text-base leading-compact text-slate-copy md:mx-0 md:mt-2.5">
             Learn the complete step-by-step system to create profitable digital products
             using AI and Canva, sell them on Etsy, and build an online business without
             inventory, shipping, or coding.
@@ -63,7 +63,7 @@ export default function Hero() {
         {stats.map(([value, label, prefix, suffix]) => (
           <div className="flex flex-col-reverse justify-end gap-1.25" key={label}>
             <dt className="text-sm text-slate-copy uppercase">{label}</dt>
-            <dd className="text-stat font-bold tracking-tight">{typeof value === "number" ? <CountUp {...{ value, prefix, suffix }} /> : value}</dd>
+            <dd className="text-stat font-bold tracking-tight max-md:text-[1.75rem]">{typeof value === "number" ? <CountUp {...{ value, prefix, suffix }} /> : value}</dd>
           </div>
         ))}
       </dl>
