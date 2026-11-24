@@ -30,7 +30,7 @@ export function MobileOffer({ className = "" }) {
 
 export default function Sidebar() {
   return (
-    <header className="bg-black px-4 text-white md:px-6">
+    <header className="sticky top-0 z-40 bg-black px-4 text-white md:px-6">
       <div className={`${landingContainer} flex min-h-22 items-center justify-between gap-4 md:min-h-25.5 md:gap-6`}>
         <a href="#home" className={`shrink-0 ${focusOutline}`}>
           <img className="block h-16 w-36 object-contain md:h-auto md:w-33.75" src="/assets/logo.webp" alt="Creator Studio, home" width="135" height="67" />
