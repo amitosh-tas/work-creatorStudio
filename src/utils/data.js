@@ -4,4 +4,5 @@ export const SidebarData = [
   { label: "Pricing", path: "#pricing" },
   { label: "Testimonials", path: "#testimonials" },
   { label: "FAQ's", path: "#faq" },
+  { label: "Refund Policy", path: "/refund-policy/" },
 ]

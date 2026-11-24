@@ -88,10 +88,10 @@ export function FAQ() {
   )
 }
 
-export function Footer() {
+export function Footer({ homeHref }) {
   return (
     <footer className="grid justify-items-center gap-6 bg-black px-6 pt-12 pb-7.5 text-center text-white">
-      <a href="#home" className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></a>
+      <a href={homeHref} className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></a>
       <nav className="flex gap-6" aria-label="Social platforms">
         {socialProfiles.map(({ name, href, icon, badge, size }) => (
           <a key={name} href={href} aria-label={name} className={`grid size-9 place-items-center rounded-full ${badge} ${focusOutline}`}>

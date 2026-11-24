@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises"
+import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { build, createServer } from "vite"
 
 const bundle = await build()
@@ -19,7 +19,7 @@ const vite = await createServer({
 })
 
 try {
-  const { renderHome } = await vite.ssrLoadModule("/src/render.jsx")
+  const { renderPage } = await vite.ssrLoadModule("/src/render.jsx")
   const output = new URL("../dist/index.html", import.meta.url)
   const template = await readFile(output, "utf8")
   const root = '<div id="root"></div>'
@@ -28,14 +28,24 @@ try {
     throw new Error("The home page mount point is missing from the Vite output.")
   }
 
-  // Keep the landing page enhancements while dropping React's client entry.
-  const page = template
+  const staticTemplate = template
     .replace(/<script type="module"[^>]*><\/script>\s*/g, "")
     .replace("/src/landing-motion.js", `/${motion.fileName}`)
-    .replace(root, () => `<div id="root">${renderHome()}</div>`)
+  const page = staticTemplate
+    .replace(root, () => `<div id="root">${renderPage("/")}</div>`)
     .replace("</body>", `  <script type="module" src="/${heroVideo.fileName}"></script>\n  </body>`)
 
   await writeFile(output, page)
+
+  const refundPolicyDirectory = new URL("../dist/refund-policy/", import.meta.url)
+  const refundPolicyPage = staticTemplate
+    .replace(`    <link rel="modulepreload" crossorigin href="/${heroVideo.fileName}">\n`, "")
+    .replace(root, () => `<div id="root">${renderPage("/refund-policy/")}</div>`)
+    .replace(/<title>.*?<\/title>/, "<title>Refund Policy | Creator Studio</title>")
+    .replace(/<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="Read the refund policy for Creator Studio’s Etsy Digital Products Course." />')
+
+  await mkdir(refundPolicyDirectory, { recursive: true })
+  await writeFile(new URL("index.html", refundPolicyDirectory), refundPolicyPage)
 } finally {
   await vite.close()
 }
