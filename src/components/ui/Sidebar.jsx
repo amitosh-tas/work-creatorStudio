@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom"
 import { SidebarData } from "@/utils/data"
 import { CourseLink, focusOutline, landingContainer } from "../home/shared"
 
@@ -7,7 +8,9 @@ function NavigationItems() {
   return (
     <>
       {SidebarData.map(({ label, path }) => (
-        <a className={navLink} key={label} href={path}>{label}</a>
+        path.includes("#")
+          ? <Link className={navLink} key={label} to={path}>{label}</Link>
+          : <NavLink className={navLink} key={label} to={path}>{label}</NavLink>
       ))}
     </>
   )
@@ -35,9 +38,9 @@ export default function Sidebar() {
   return (
     <header className="sticky top-0 z-40 bg-black px-4 text-white md:px-6">
       <div className={`${landingContainer} flex min-h-22 items-center justify-between gap-4 md:min-h-25.5 md:gap-6`}>
-        <a href="#home" className={`shrink-0 ${focusOutline}`}>
+        <Link to="/#home" className={`shrink-0 ${focusOutline}`}>
           <img className="block h-16 w-36 object-contain md:h-auto md:w-33.75" src="/assets/logo.webp" alt="Creator Studio, home" width="135" height="67" />
-        </a>
+        </Link>
         <button
           type="button"
           data-mobile-menu-open

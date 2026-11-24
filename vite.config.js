@@ -9,15 +9,6 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  build: {
-    rollupOptions: {
-      input: {
-        home: path.resolve(import.meta.dirname, "index.html"),
-        landingMotion: path.resolve(import.meta.dirname, "src/landing-motion.js"),
-        heroVideo: path.resolve(import.meta.dirname, "src/hero-video.js"),
-      },
-    },
-  },
   resolve:{
     alias:{
       "@": path.resolve(import.meta.dirname, "./src")

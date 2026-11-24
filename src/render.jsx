@@ -1,9 +1,9 @@
-import { renderToStaticMarkup } from "react-dom/server"
+import { renderToString } from "react-dom/server"
 import { StaticRouter } from "react-router-dom"
 import App from "./App"
 
 export function renderPage(location) {
-  return renderToStaticMarkup(
+  return renderToString(
     <StaticRouter location={location}>
       <App />
     </StaticRouter>,

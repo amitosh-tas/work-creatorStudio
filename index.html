@@ -89,13 +89,6 @@
         })
       })
 
-      if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
-        addEventListener("scroll", () => {
-          if (!document.getElementById("home")) return
-          const motionSource = "/src/landing-motion.js"
-          import(motionSource).catch(() => {})
-        }, { once: true, passive: true })
-      }
     </script>
   </body>
 </html>

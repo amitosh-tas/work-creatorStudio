@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { asset } from "../../utils/asset"
 import { Accordion, courseButton, CourseLink, featureSplit, focusOutline, goldButton, Section, SectionHeading } from "./shared"
 
@@ -88,15 +89,15 @@ export function FAQ() {
   )
 }
 
-export function Footer({ homeHref }) {
+export function Footer() {
   return (
     <footer className="grid justify-items-center gap-6 bg-black px-6 pt-12 pb-7.5 text-center text-white">
-      <a href={homeHref} className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></a>
+      <Link to="/#home" className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></Link>
       <nav className="flex gap-6" aria-label="Social platforms">
         {socialProfiles.map(({ name, href, icon, badge, size }) => (
-          <a key={name} href={href} aria-label={name} className={`grid size-9 place-items-center rounded-full ${badge} ${focusOutline}`}>
+          <Link key={name} to={href} aria-label={name} className={`grid size-9 place-items-center rounded-full ${badge} ${focusOutline}`}>
             <img src={`/assets/social-${icon}.svg`} alt="" className={`${size} object-contain invert`} loading="lazy" />
-          </a>
+          </Link>
         ))}
       </nav>
       <p className="max-w-280 text-sm">© 2026 <strong className="font-medium text-brand">Tech Arch Softwares Pvt. Ltd.</strong> All Rights Reserved. This course and all associated materials are protected by copyright law and may not be copied, shared, reproduced, distributed, or resold without prior written consent.</p>

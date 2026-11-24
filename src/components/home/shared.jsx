@@ -38,9 +38,9 @@ export function SectionHeading({ label, title, description, pill = false, align 
 export function CourseLink({ lesson = false, className = "" }) {
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   return (
-    <a className={`${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`} href={lesson ? "#free-lesson" : "#pricing"}>
+    <Link className={`${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`} to={lesson ? "/#free-lesson" : "/#pricing"}>
       {lesson ? "Unlock Free Lesson" : "Join Now"}
-    </a>
+    </Link>
   )
 }
 
@@ -71,3 +71,4 @@ export function Accordion({ items, group }) {
     </div>
   )
 }
+import { Link } from "react-router-dom"

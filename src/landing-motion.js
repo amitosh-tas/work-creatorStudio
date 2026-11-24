@@ -1,8 +1,8 @@
 import { animate } from "motion/mini"
 
-const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
-
-if (!reducedMotion.matches && "IntersectionObserver" in window) {
+export function startLandingMotion() {
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
+  if (reducedMotion.matches || !("IntersectionObserver" in window)) return
   const targets = document.querySelectorAll("[data-reveal]")
   const running = new Set()
   const stepStagger = 140
@@ -39,11 +39,15 @@ if (!reducedMotion.matches && "IntersectionObserver" in window) {
   }
 
   function finishMotion(event) {
-    if (!event.matches) return
+    if (event.matches) stopMotion()
+  }
+
+  function stopMotion() {
     observer.disconnect()
     for (const animation of running) animation.complete()
     reducedMotion.removeEventListener("change", finishMotion)
   }
 
   reducedMotion.addEventListener("change", finishMotion)
+  return stopMotion
 }

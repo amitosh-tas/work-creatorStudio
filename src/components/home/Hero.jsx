@@ -14,7 +14,7 @@ function CountUp({ value, prefix = "", suffix = "+" }) {
   return (
     <>{prefix}<hero-count className="inline-grid text-center tabular-nums" data-value={value}>
       <span className="col-start-1 row-start-1 opacity-0">{number}</span>
-      <span className="col-start-1 row-start-1" aria-hidden="true">{number}</span>
+      <span className="col-start-1 row-start-1" aria-hidden="true" suppressHydrationWarning>{number}</span>
     </hero-count>{suffix}</>
   )
 }

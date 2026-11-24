@@ -1,17 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { build, createServer } from "vite"
 
-const bundle = await build()
-const motion = bundle.output.find(
-  file => file.type === "chunk" && file.isEntry && file.name === "landingMotion",
-)
-const heroVideo = bundle.output.find(
-  file => file.type === "chunk" && file.isEntry && file.name === "heroVideo",
-)
-
-if (!motion || !heroVideo) {
-  throw new Error("A landing page entry is missing from the Vite output.")
-}
+await build()
 
 const vite = await createServer({
   appType: "custom",
@@ -28,18 +18,13 @@ try {
     throw new Error("The home page mount point is missing from the Vite output.")
   }
 
-  const staticTemplate = template
-    .replace(/<script type="module"[^>]*><\/script>\s*/g, "")
-    .replace("/src/landing-motion.js", `/${motion.fileName}`)
-  const page = staticTemplate
+  const page = template
     .replace(root, () => `<div id="root">${renderPage("/")}</div>`)
-    .replace("</body>", `  <script type="module" src="/${heroVideo.fileName}"></script>\n  </body>`)
 
   await writeFile(output, page)
 
   const refundPolicyDirectory = new URL("../dist/refund-policy/", import.meta.url)
-  const refundPolicyPage = staticTemplate
-    .replace(`    <link rel="modulepreload" crossorigin href="/${heroVideo.fileName}">\n`, "")
+  const refundPolicyPage = template
     .replace(root, () => `<div id="root">${renderPage("/refund-policy/")}</div>`)
     .replace(/<title>.*?<\/title>/, "<title>Refund Policy | Creator Studio</title>")
     .replace(/<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="Read the refund policy for Creator Studio’s Etsy Digital Products Course." />')
