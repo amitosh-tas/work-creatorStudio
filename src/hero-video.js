@@ -10,13 +10,17 @@ class HeroHLSPlayer extends HTMLElement {
     this.#reset()
   }
 
+  startMutedAutoplay() {
+    if (!this.#session) this.#start(false, true)
+  }
+
   #onPlay = (event) => {
     if (event.target.closest("[data-play]") && !this.#session) {
       this.#start(event.detail === 0)
     }
   }
 
-  async #start(keyboardActivation) {
+  async #start(keyboardActivation, autoplay = false) {
     const video = this.querySelector("video")
     const quality = this.querySelector("select")
     const poster = this.querySelector("[data-poster]")
@@ -29,6 +33,7 @@ class HeroHLSPlayer extends HTMLElement {
     this.#session = session
     status.textContent = "Loading video…"
     play.setAttribute("aria-disabled", "true")
+    video.muted = autoplay
     video.preload = "auto"
     video.hidden = false
 
@@ -53,8 +58,8 @@ class HeroHLSPlayer extends HTMLElement {
 
     const beginPlayback = () => {
       video.play().catch((error) => {
-        // The native controls remain available if the browser blocks autoplay.
-        if (error.name === "NotAllowedError") revealVideo()
+        if (error.name === "NotAllowedError" && autoplay && !signal.aborted) this.#reset()
+        else if (error.name === "NotAllowedError") revealVideo()
         else if (error.name !== "AbortError") fail()
       })
     }
@@ -64,9 +69,43 @@ class HeroHLSPlayer extends HTMLElement {
       video.addEventListener("error", () => fail(), { once: true, signal })
       video.src = source
       beginPlayback()
+
+      fetch(source, { signal }).then(async (response) => {
+        if (!response.ok) return
+        const manifest = await response.text()
+        if (signal.aborted) return
+
+        const variants = new Map()
+        for (const [, height, path] of manifest.matchAll(/^#EXT-X-STREAM-INF:[^\r\n]*\bRESOLUTION=\d+x(\d+)[^\r\n]*\r?\n([^#\r\n][^\r\n]*)/gm)) {
+          variants.set(Number(height), new URL(path.trim(), response.url || source).href)
+        }
+        if (variants.size < 2) return
+
+        for (const height of [...variants.keys()].sort((a, b) => a - b)) {
+          quality.add(new Option(`${height}p`, String(height)))
+        }
+        quality.hidden = !session.revealed
+
+        let resumeAt
+        video.addEventListener("loadedmetadata", () => {
+          if (resumeAt === undefined) return
+          video.currentTime = Math.min(resumeAt, video.duration)
+          resumeAt = undefined
+        }, { signal })
+
+        quality.addEventListener("change", () => {
+          const nextSource = variants.get(Number(quality.value)) ?? source
+          if (video.src === nextSource) return
+          const wasPlaying = !video.paused
+          resumeAt ??= video.currentTime
+          video.src = nextSource
+          if (wasPlaying) video.play().catch(() => {})
+        }, { signal })
+      }).catch(() => {})
     }
 
-    video.addEventListener("loadeddata", revealVideo, { once: true, signal })
+    if (!autoplay) video.addEventListener("loadeddata", revealVideo, { once: true, signal })
+    video.addEventListener("playing", revealVideo, { once: true, signal })
     session.timeout = setTimeout(() => fail(), 25000)
 
     try {

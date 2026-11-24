@@ -23,14 +23,21 @@ try {
 
   await writeFile(output, page)
 
-  const refundPolicyDirectory = new URL("../dist/refund-policy/", import.meta.url)
-  const refundPolicyPage = template
-    .replace(root, () => `<div id="root">${renderPage("/refund-policy/")}</div>`)
-    .replace(/<title>.*?<\/title>/, "<title>Refund Policy | Creator Studio</title>")
-    .replace(/<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="Read the refund policy for Creator Studio’s Etsy Digital Products Course." />')
+  const pages = [
+    ["refund-policy", "Refund Policy", "Read the refund policy for Creator Studio’s Etsy Digital Products Course."],
+    ["unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
+  ]
 
-  await mkdir(refundPolicyDirectory, { recursive: true })
-  await writeFile(new URL("index.html", refundPolicyDirectory), refundPolicyPage)
+  for (const [path, title, description] of pages) {
+    const directory = new URL(`../dist/${path}/`, import.meta.url)
+    const html = template
+      .replace(root, () => `<div id="root">${renderPage(`/${path}/`)}</div>`)
+      .replace(/<title>.*?<\/title>/, `<title>${title} | Creator Studio</title>`)
+      .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
+
+    await mkdir(directory, { recursive: true })
+    await writeFile(new URL("index.html", directory), html)
+  }
 } finally {
   await vite.close()
 }

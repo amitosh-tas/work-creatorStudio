@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { X } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import Hero from "../components/home/Hero"
 import { CourseOverview, ProductExamples } from "../components/home/CourseOverview"
 import { BusinessModel } from "../components/home/BusinessModel"
@@ -7,6 +8,8 @@ import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDeta
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
 
 export default function Home() {
+  const navigate = useNavigate()
+
   useEffect(() => {
     const controller = new AbortController()
     let stopMotion
@@ -53,6 +56,18 @@ export default function Home() {
           title="Etsy Course Form"
           loading="lazy"
           className="block h-[32rem] w-full border-0"
+          onLoad={(event) => {
+            let pathname
+            try {
+              pathname = event.currentTarget.contentWindow.location.pathname
+            } catch {
+              // The form remains cross-origin until it redirects back to this site.
+              return
+            }
+            if (pathname === "/unlock-free-lesson" || pathname === "/unlock-free-lesson/") {
+              navigate("/unlock-free-lesson/")
+            }
+          }}
         />
       </dialog>
     </main>

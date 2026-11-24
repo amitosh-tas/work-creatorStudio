@@ -1,10 +1,17 @@
+import { useEffect, useRef } from "react"
 import { focusOutline } from "./shared"
 
-export default function HLSPlayer({ src, poster, posterSet, posterSizes }) {
+export default function HLSPlayer({ src, poster, posterSet, posterSizes, label = "Course introduction", autoplay = false }) {
+  const player = useRef(null)
+
+  useEffect(() => {
+    if (autoplay) player.current.startMutedAutoplay()
+  }, [autoplay])
+
   return (
-    <hero-hls-player data-src={src} className="peer relative block aspect-video bg-neutral-900 data-playing:z-10">
-      <div data-poster className="relative z-10">
-        <img
+    <hero-hls-player ref={player} data-src={src} className="peer relative block aspect-video bg-neutral-900 data-playing:z-10">
+      <div data-poster className="absolute inset-0 z-10">
+        {poster && <img
           className="block h-auto w-full"
           src={poster}
           srcSet={posterSet}
@@ -13,16 +20,16 @@ export default function HLSPlayer({ src, poster, posterSet, posterSizes }) {
           width="768"
           height="432"
           fetchPriority="high"
-        />
+        />}
         <button
           type="button"
           data-play
-          aria-label="Play course introduction"
+          aria-label={`Play ${label.toLowerCase()}`}
           className={`absolute top-1/2 left-1/2 grid h-11.5 w-16.5 -translate-1/2 cursor-pointer place-items-center rounded-control bg-black/55 after:border-y-8 after:border-l-14 after:border-y-transparent after:border-l-white ${focusOutline}`}
         />
       </div>
-      <video hidden controls playsInline preload="none" tabIndex={0} aria-label="Course introduction" className="absolute inset-0 size-full bg-black" />
-      <select hidden aria-label="Video quality" className={`absolute top-2 right-2 rounded-md bg-black/80 px-2 py-1 text-sm text-white ${focusOutline}`}>
+      <video hidden controls playsInline preload="none" tabIndex={0} aria-label={label} className="absolute inset-0 size-full bg-black" />
+      <select hidden aria-label="Video quality" className={`absolute top-2 right-2 z-20 rounded-md bg-black/80 px-2 py-1 text-sm text-white ${focusOutline}`}>
         <option value="-1">Auto</option>
       </select>
       <p data-video-status role="status" className="pointer-events-none absolute inset-x-2 top-2 z-20 mx-auto w-fit rounded-md bg-black/80 px-2 py-1 text-center text-sm text-white empty:hidden" />

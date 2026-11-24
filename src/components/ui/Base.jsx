@@ -5,12 +5,15 @@ import { Footer, RazorpayCheckout } from "../home/Enrollment"
 
 function Base() {
   const isHome = Boolean(useMatch("/"))
+  const isLesson = Boolean(useMatch("/unlock-free-lesson"))
   const { hash, key } = useLocation()
 
   useEffect(() => {
-    document.title = isHome
-      ? "Creator Studio | Create and Sell Digital Products on Etsy"
-      : "Refund Policy | Creator Studio"
+    if (isHome) {
+      document.title = "Creator Studio | Create and Sell Digital Products on Etsy"
+    } else {
+      document.title = isLesson ? "Unlock Free Lesson | Creator Studio" : "Refund Policy | Creator Studio"
+    }
 
     const frame = requestAnimationFrame(() => {
       if (hash) {
@@ -21,7 +24,7 @@ function Base() {
     })
 
     return () => cancelAnimationFrame(frame)
-  }, [hash, isHome, key])
+  }, [hash, isHome, isLesson, key])
 
   return (
     <div className={`min-h-dvh bg-canvas font-poppins text-ink ${isHome ? "pb-mobile-page md:pb-0" : ""}`}>
