@@ -37,9 +37,25 @@ export function SectionHeading({ label, title, description, pill = false, align 
 
 export function CourseLink({ lesson = false, className = "" }) {
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
+  const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
+
+  if (lesson) {
+    return (
+      <button
+        type="button"
+        className={`cursor-pointer ${classes}`}
+        aria-haspopup="dialog"
+        aria-controls="free-lesson-dialog"
+        onClick={() => document.getElementById("free-lesson-dialog").showModal()}
+      >
+        Unlock Free Lesson
+      </button>
+    )
+  }
+
   return (
-    <Link className={`${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`} to={lesson ? "/#free-lesson" : "/#pricing"}>
-      {lesson ? "Unlock Free Lesson" : "Join Now"}
+    <Link className={classes} to="/#pricing">
+      Join Now
     </Link>
   )
 }
