@@ -118,7 +118,7 @@ export function FAQ() {
 
 export function Footer() {
   return (
-    <footer className="grid justify-items-center gap-6 bg-black px-6 pt-12 pb-7.5 text-center text-white">
+    <footer className="grid justify-items-center gap-6 bg-black px-6 pt-6 pb-7.5 md:pt-12 text-center text-white">
       <Link to="/#home" className={focusOutline}><img className="block object-contain" src="/assets/logo.webp" alt="Creator Studio, back to home" width="150" height="72" loading="lazy" /></Link>
       <nav className="flex gap-6" aria-label="Social platforms">
         {socialProfiles.map(({ name, href, icon, badge, size }) => (

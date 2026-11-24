@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section className="relative isolate flex min-h-[calc(100dvh-5.5rem-var(--spacing-mobile-page))] flex-col justify-center border-t border-black bg-canvas px-4.5 pt-2.5 pb-6 text-black sm:px-6 md:min-h-[calc(100dvh-6.375rem)] md:pt-11 md:pb-16 lg:py-16" id="home">
       <img className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full w-full object-cover object-top" src="/assets/heroBg.webp" alt="" />
-      <div className="mx-auto grid w-full max-w-hero-stack items-center gap-8 lg:flex lg:max-w-hero xl:gap-12 2xl:gap-28">
+      <div className="mx-auto grid w-full max-w-hero-stack items-center gap-5 md:gap-8 lg:flex lg:max-w-hero xl:gap-12 2xl:gap-28">
         <div className="min-w-0 text-center md:text-left lg:flex-117">
           <p className="flex items-center justify-center gap-2 rounded-full border-2 border-warm-border px-3 py-0.75 text-xs text-gold-ink sm:gap-4 sm:text-sm md:inline-flex md:justify-start md:pr-1.25 md:pl-4 lg:ml-1.5">
             <img className="shrink-0" src={asset(1)} width="22" height="22" alt="" />
@@ -33,7 +33,7 @@ export default function Hero() {
             Create &amp; Sell Digital<br className="hidden 2xl:inline" /> Products on Etsy Using AI
             <span className="block text-brand">Even If You're Starting<br className="hidden 2xl:inline" /> From Zero</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-157.5 text-base leading-compact text-slate-copy md:mx-0 md:mt-2.5">
+          <p className="mx-auto mt-3.5 max-w-157.5 text-base leading-compact text-slate-copy md:mx-0 md:mt-2.5">
             Learn the complete step-by-step system to create profitable digital products
             using AI and Canva, sell them on Etsy, and build an online business without
             inventory, shipping, or coding.
@@ -59,7 +59,7 @@ export default function Hero() {
           <CourseLink lesson className="min-w-55 px-5 max-md:min-h-12.5" />
         </div>
       </div>
-      <dl className="mx-auto mt-7 grid w-full max-w-hero-stack grid-cols-2 gap-x-3 gap-y-5 rounded-action bg-canvas px-3 py-6 text-center shadow-stat-strip md:mt-10 md:py-5 lg:mt-12 lg:max-w-stat-strip lg:grid-cols-4 lg:px-10 lg:pt-7 lg:pb-4.5">
+      <dl className="mx-auto mt-5 grid w-full max-w-hero-stack grid-cols-2 gap-x-3 gap-y-5 rounded-action bg-canvas px-3 py-6 text-center shadow-stat-strip md:mt-10 md:py-5 lg:mt-12 lg:max-w-stat-strip lg:grid-cols-4 lg:px-10 lg:pt-7 lg:pb-4.5">
         {stats.map(([value, label, prefix, suffix]) => (
           <div className="flex flex-col-reverse justify-end gap-1.25" key={label}>
             <dt className="text-sm text-slate-copy uppercase">{label}</dt>

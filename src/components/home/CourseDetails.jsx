@@ -18,7 +18,7 @@ export function CourseFit() {
   return (
     <Section tone="cream">
       <SectionHeading pill label="Why This Course" title="Is This Course Right For You?" description="Find out who this course is designed for and what it takes to get started." />
-      <div className="mx-auto mt-9 mb-13.5 grid max-w-feature-grid gap-5.5 md:mt-17 md:mb-26 md:grid-cols-2 md:gap-7.5">
+      <div className="mx-auto mb-6 grid max-w-feature-grid gap-5.5 md:mt-17 md:mb-26 md:grid-cols-2 md:gap-7.5">
         {audiences.map(([title, description, items], index) => (
           <article data-reveal className={`min-h-70 rounded-panel px-5 py-7 shadow-panel ${index === 0 ? "bg-white" : "bg-sand"}`} key={title}>
             <h3 className="text-section-label font-bold">{title}</h3><p className="mt-1.25 mb-7">{description}</p>
@@ -29,7 +29,7 @@ export function CourseFit() {
         ))}
       </div>
       <SectionHeading pill label="Free vs Structured" title={<>This Course vs Random<br />YouTube Videos</>} description="Free content gives you pieces. A system gives you a finished shop." />
-      <ComparisonTable course className="mb-13.5 md:mb-26" headings={["What You Get", "This Course", "YouTube"]} rows={courseFeatures.map(feature => [feature, "✓", "×"])} />
+      <ComparisonTable course className="mb-6 md:mb-26" headings={["What You Get", "This Course", "YouTube"]} rows={courseFeatures.map(feature => [feature, "✓", "×"])} />
       <SectionHeading pill label="Quick Highlights" title="Built to Actually Be Finished" />
       <ul className="mx-auto grid max-w-feature-grid grid-cols-2 gap-3.5 md:gap-x-7 md:gap-y-5 lg:grid-cols-4">
         {highlights.map((label, index) => <li data-reveal className="flex min-h-24 items-center gap-3 rounded-panel bg-white p-3 leading-tight font-semibold shadow-panel md:px-5 md:py-3.5" key={label}><img className="shrink-0" src={asset(65 + index)} alt="" width="32" height="32" loading="lazy" />{label}</li>)}
@@ -51,7 +51,9 @@ export function Instructor() {
           <p className="mb-3.5 leading-relaxed text-muted">Then I discovered Etsy. I started creating simple digital products, learned what buyers actually search for, and built a store that sells while I sleep.</p>
           <p className="mb-3.5 leading-relaxed text-muted">Over 1,500 sales later, I teach the same process in this course.</p>
           <ul className="mt-7.5 mb-9 grid gap-x-4 gap-y-1.75 text-muted md:grid-cols-2">{["1,500+ real Etsy sales", "Tested AI + Canva workflow", "Taught for complete beginners", "Updated as Etsy and AI change"].map(item => <CheckItem key={item}>{item}</CheckItem>)}</ul>
-          <CourseLink lesson />
+          <div className="max-md:flex max-md:justify-center">
+            <CourseLink lesson />
+          </div>
         </div>
       </div>
     </Section>

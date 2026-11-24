@@ -19,7 +19,7 @@ export function CourseOverview() {
   return (
     <Section id="about" tone="blue" flushBottom>
       <SectionHeading label="Why This Course" title="Looking for a Practical Way to Build an Additional Income Stream?" description="Many online income opportunities seem appealing at first, but they often come with challenges that make it difficult for beginners to get started and stay consistent." />
-      <div className="mb-8 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:mb-19.5 md:gap-5 lg:grid-cols-4">
+      <div className="mb-6 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:mb-19.5 md:gap-5 lg:grid-cols-4">
         {challenges.map(([title, description], index) => (
           <article data-reveal className="rounded-2xl bg-white px-3.75 py-7 text-center shadow-panel lg:min-h-77.5" key={title}>
             <img className="mx-auto mb-4.5 size-17.5" src={asset(9 + index)} width="70" height="70" alt="" loading="lazy" />
@@ -36,7 +36,7 @@ export function CourseOverview() {
           <CourseLink />
         </div>
         <img className="hidden aspect-28/25 w-full self-end object-contain object-bottom lg:block lg:min-w-0 lg:flex-115" src={asset(13, "webp")} alt="Mohan Singh pointing to the course outcomes" loading="lazy" />
-        <ul className="grid gap-4.5 pb-10.5 md:grid-cols-2 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">
+        <ul className="grid gap-4.5 pb-6 md:grid-cols-2 md:pb-10.5 lg:min-w-0 lg:flex-83 lg:grid-cols-1 lg:pb-0">
           {outcomes.map(outcome => (
             <li className="flex min-h-19 items-center gap-3 rounded-lg border border-neutral-800 px-3.5 py-2.5 hover:bg-brand motion-safe:transition-colors motion-safe:duration-200" key={outcome}>
               <img className="shrink-0" src={asset(84)} alt="" width="42" height="42" loading="lazy" />
