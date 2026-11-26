@@ -22,7 +22,7 @@ export default function ThankYou() {
 
   return (
     <main className="bg-[#fff0d8] bg-[radial-gradient(ellipse_at_12%_16%,#ffe2a0,transparent_42%),radial-gradient(ellipse_at_48%_65%,#fff9e9,transparent_55%),radial-gradient(ellipse_at_80%_10%,#fff8ee,transparent_42%),linear-gradient(125deg,#fff4e2,#ffebaf_64%,#ffe6d7)] px-5 py-14 text-center text-black md:px-8 md:py-24 lg:pt-28 lg:pb-32">
-      <div className="mx-auto max-w-[85rem]">
+      <div className="mx-auto max-w-340">
         <h1 className="text-[clamp(2rem,4vw,3.5rem)] leading-tight font-semibold tracking-heading">Thank You for Your Purchase!</h1>
 
         <div className="mt-8 grid items-center gap-7 lg:grid-cols-2 lg:gap-6">
@@ -35,15 +35,15 @@ export default function ThankYou() {
               Congratulations on taking the next step in your learning journey. Your enrollment has been confirmed, and you can now access your course materials using the link provided in your email. We look forward to helping you achieve your goals and make the most of your learning experience.
             </p>
             <p className="lg:pt-3">
-              Can’t find the email? Please check your Spam, Junk, Promotions, or Updates folder. If you need assistance, contact us at{" "}
+              Can't find the email? Please check your Spam, Junk, Promotions, or Updates folder. If you need assistance, contact us at{" "}
               <a className="break-all text-blue-700 underline" href="mailto:99creatorstudio@gmail.com">99creatorstudio@gmail.com</a>,
-              {" "}and we’ll be happy to help.
+              {" "}and we'll be happy to help.
             </p>
           </div>
         </div>
 
-        <section className="mx-auto mt-12 max-w-[54rem] leading-7 lg:mt-20">
-          <h2 className="text-xl font-bold">You’re now part of the Creator Studio community.</h2>
+        <section className="mx-auto mt-12 max-w-216 leading-7 lg:mt-20">
+          <h2 className="text-xl font-bold">You're now part of the Creator Studio community.</h2>
           <p className="mt-1">
             Join our private WhatsApp community to connect with fellow students, receive course updates, ask questions, and get exclusive AI &amp; Etsy insights.
           </p>

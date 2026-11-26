@@ -54,7 +54,7 @@ export default function Home() {
             // The dialog can close when browser storage is unavailable.
           }
         }}
-        className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[45rem] overflow-y-auto rounded-[1.875rem] bg-white p-0 text-ink shadow-panel backdrop:bg-black/50"
+        className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-180 overflow-y-auto rounded-panel bg-white p-0 text-ink shadow-panel backdrop:bg-black/50"
       >
         <h2 id="free-lesson-dialog-title" className="sr-only">Unlock Free Lesson</h2>
         <form method="dialog" className="sticky top-0 z-10 flex justify-end bg-white px-3 pt-3">
@@ -66,7 +66,7 @@ export default function Home() {
           src="https://api.leadconnectorhq.com/widget/form/d1dBNxJoHnIVzIJis765"
           title="Etsy Course Form"
           loading="lazy"
-          className="block h-[32rem] w-full border-0"
+          className="block h-128 w-full border-0"
           onLoad={(event) => {
             if (lessonUnlocked.current) return
 
