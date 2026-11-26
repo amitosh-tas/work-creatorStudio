@@ -1,11 +1,5 @@
 export const trackLead = () => {
-  if (localStorage.getItem('lead_tracked')) return;
-
-  if (typeof window.fbq !== 'function') return;
-
-  window.fbq('track', 'Lead');
-
-  localStorage.setItem('lead_tracked', 'true');
+  window.fbq?.('track', 'Lead');
 };
 
 export const trackCheckout = () => {

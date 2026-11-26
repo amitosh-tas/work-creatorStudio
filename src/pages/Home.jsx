@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { X } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import Hero from "../components/home/Hero"
@@ -6,9 +6,11 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
+import { trackLead } from "@/utils/metaPixel"
 
 export default function Home() {
   const navigate = useNavigate()
+  const lessonUnlocked = useRef(false)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -57,6 +59,8 @@ export default function Home() {
           loading="lazy"
           className="block h-[32rem] w-full border-0"
           onLoad={(event) => {
+            if (lessonUnlocked.current) return
+
             let pathname
             try {
               pathname = event.currentTarget.contentWindow.location.pathname
@@ -65,6 +69,8 @@ export default function Home() {
               return
             }
             if (pathname === "/unlock-free-lesson" || pathname === "/unlock-free-lesson/") {
+              lessonUnlocked.current = true
+              trackLead()
               navigate("/unlock-free-lesson/")
             }
           }}
