@@ -26,6 +26,7 @@ try {
   const pages = [
     ["refund-policy", "Refund Policy", "Read the refund policy for Creator Studio’s Etsy Digital Products Course."],
     ["unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
+    ["thank-you", "Thank You", "Temporary Creator Studio purchase tracking test page."],
   ]
 
   for (const [path, title, description] of pages) {
@@ -36,7 +37,10 @@ try {
       .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
 
     await mkdir(directory, { recursive: true })
-    await writeFile(new URL("index.html", directory), html)
+    const pageHtml = path === "thank-you"
+      ? html.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>')
+      : html
+    await writeFile(new URL("index.html", directory), pageHtml)
   }
 } finally {
   await vite.close()
