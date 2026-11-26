@@ -44,6 +44,7 @@ export function SectionHeading({ label, title, description, pill = false, align 
 
 export function CourseLink({ lesson = false, className = "" }) {
   const usaPage = useMatch("/digital-product-in-usa/*")
+  const usaLesson = useMatch("/unlock-free-lesson-usa")
   const coursesPage = useMatch("/course/*")
   const [checkoutMessage, setCheckoutMessage] = useState("")
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
@@ -72,7 +73,7 @@ export function CourseLink({ lesson = false, className = "" }) {
     )
   }
 
-  if (usaPage) {
+  if (usaPage || usaLesson) {
     return <a className={classes} href={usaCheckoutUrl} onClick={trackCheckout}>Join Now</a>
   }
 

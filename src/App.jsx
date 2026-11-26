@@ -15,7 +15,7 @@ function App() {
           <Route path="course" element={<Home />} />
           <Route path="unlock-free-lesson-course" element={<UnlockFreeLesson />} />
           <Route path="digital-product-in-usa" element={<Home />} />
-          <Route path="digital-product-in-usa/unlock-free-lesson" element={<UnlockFreeLesson />} />
+          <Route path="unlock-free-lesson-usa" element={<UnlockFreeLesson />} />
           <Route path="digital-product-in-usa/thank-you" element={<ThankYou />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="refund-policy" element={<RefundPolicy />} />

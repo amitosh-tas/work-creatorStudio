@@ -7,7 +7,7 @@ import { Footer, RazorpayCheckout } from "../home/Enrollment"
 function Base() {
   const isRoot = Boolean(useMatch("/"))
   const isUsaLanding = Boolean(useMatch("/digital-product-in-usa"))
-  const isUsaLesson = Boolean(useMatch("/digital-product-in-usa/unlock-free-lesson"))
+  const isUsaLesson = Boolean(useMatch("/unlock-free-lesson-usa"))
   const isUsa = isUsaLanding || isUsaLesson
   const isCoursesLanding = Boolean(useMatch("/course"))
   const isCoursesLesson = Boolean(useMatch("/unlock-free-lesson-course"))

@@ -26,7 +26,7 @@ export default function UnlockFreeLesson() {
     if (sharedLesson && (lessonSource === "/digital-product-in-usa" || lessonSource === "/course")) {
       const destination = lessonSource === "/course"
         ? "/unlock-free-lesson-course/"
-        : "/digital-product-in-usa/unlock-free-lesson/"
+        : "/unlock-free-lesson-usa/"
       navigate(destination + window.location.search + window.location.hash, { replace: true })
       return
     }

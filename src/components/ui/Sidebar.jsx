@@ -19,9 +19,10 @@ function NavigationItems({ homePath }) {
 
 export function MobileOffer({ className = "" }) {
   const usaPage = useMatch("/digital-product-in-usa/*")
+  const usaLesson = useMatch("/unlock-free-lesson-usa")
   const coursesPage = useMatch("/course/*")
   const coursesLesson = useMatch("/unlock-free-lesson-course")
-  const price = coursesPage || coursesLesson ? coursesPrice : usaPage ? usaCoursePrice : "₹699"
+  const price = coursesPage || coursesLesson ? coursesPrice : usaPage || usaLesson ? usaCoursePrice : "₹699"
   return (
     <aside aria-label="Course offer" className={`min-h-22 border-t border-black/15 bg-canvas px-4 pt-3 pb-mobile-offer text-ink shadow-offer md:hidden ${className}`}>
       <div className="mx-auto grid max-w-hero-stack grid-cols-2 items-center gap-2 sm:gap-4">

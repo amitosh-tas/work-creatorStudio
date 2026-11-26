@@ -13,7 +13,7 @@ export default function Home() {
   const usaLanding = useMatch("/digital-product-in-usa")
   const coursesLanding = useMatch("/course")
   const landingPath = usaLanding?.pathnameBase || coursesLanding?.pathnameBase || ""
-  const destination = coursesLanding ? "/unlock-free-lesson-course" : `${landingPath}/unlock-free-lesson`
+  const destination = coursesLanding ? "/unlock-free-lesson-course" : usaLanding ? "/unlock-free-lesson-usa" : "/unlock-free-lesson"
   const formId = coursesLanding ? "qEPpF7JSKHMUGZjXt3kI" : usaLanding ? "CoqvdkS7JHdc528ZTQaD" : "d1dBNxJoHnIVzIJis765"
   const lessonUnlocked = useRef(false)
 
