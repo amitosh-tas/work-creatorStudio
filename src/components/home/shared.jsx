@@ -1,3 +1,4 @@
+import { trackCheckout } from "@/utils/metaPixel"
 import { useState } from "react"
 
 export const landingContainer = "mx-auto w-full max-w-landing"
@@ -74,6 +75,8 @@ export function CourseLink({ lesson = false, className = "" }) {
 
           setCheckoutMessage("")
           event.currentTarget.closest("dialog")?.close()
+
+          trackCheckout()
           paymentButton.click()
         }}
       >
