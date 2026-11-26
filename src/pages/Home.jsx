@@ -6,7 +6,6 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
-import { trackLead } from "@/utils/metaPixel"
 
 export default function Home() {
   const navigate = useNavigate()
@@ -70,7 +69,6 @@ export default function Home() {
             }
             if (pathname === "/unlock-free-lesson" || pathname === "/unlock-free-lesson/") {
               lessonUnlocked.current = true
-              trackLead()
               navigate("/unlock-free-lesson/")
             }
           }}
