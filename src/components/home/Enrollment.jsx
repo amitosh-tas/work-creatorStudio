@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useMatch } from "react-router-dom"
 import { asset } from "../../utils/asset"
-import { Accordion, CourseLink, featureSplit, focusOutline, Section, SectionHeading } from "./shared"
+import { Accordion, CourseLink, featureSplit, focusOutline, Section, SectionHeading, usaCoursePrice } from "./shared"
 
 const pricingHighlights = [[85, "Lifetime access"], [86, "Beginner Friendly"], [87, "No Coding Required"]]
 const testimonials = [
@@ -47,6 +47,7 @@ export function RazorpayCheckout() {
 }
 
 export function Pricing() {
+  const usaLanding = useMatch("/digital-product-in-usa")
   return (
     <Section id="pricing">
       <SectionHeading label="Pricing" title="Ready to Turn Your Ideas Into Digital Products?" />
@@ -59,7 +60,7 @@ export function Pricing() {
           <h3 className="mb-2.5 text-3xl font-bold tracking-heading">Description</h3>
           <p className="text-muted">Join the course and learn how to create, launch, and grow a digital product business using beginner-friendly tools like Canva and AI.</p>
           <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-            <strong className="text-xl">Starting at ₹699/-</strong>
+            <strong className="text-xl">{usaLanding ? usaCoursePrice : "Starting at ₹699/-"}</strong>
             <CourseLink />
           </div>
         </div>

@@ -1,5 +1,8 @@
 import { trackCheckout } from "@/utils/metaPixel"
 import { useState } from "react"
+import { Link, useMatch } from "react-router-dom"
+
+export const usaCoursePrice = "$149.00"
 
 export const landingContainer = "mx-auto w-full max-w-landing"
 export const featureSplit = "grid items-start gap-5.5 md:grid-cols-2 md:gap-9"
@@ -39,6 +42,8 @@ export function SectionHeading({ label, title, description, pill = false, align 
 }
 
 export function CourseLink({ lesson = false, className = "" }) {
+  const usaLanding = useMatch("/digital-product-in-usa")
+  const usaCheckout = useMatch("/checkout")
   const [checkoutMessage, setCheckoutMessage] = useState("")
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
@@ -55,6 +60,10 @@ export function CourseLink({ lesson = false, className = "" }) {
         Unlock Free Lesson
       </button>
     )
+  }
+
+  if (usaLanding || usaCheckout) {
+    return <Link className={classes} to="/checkout" onClick={trackCheckout}>Join Now</Link>
   }
 
   return (

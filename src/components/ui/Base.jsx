@@ -4,13 +4,18 @@ import Sidebar, { MobileOffer } from "./Sidebar"
 import { Footer, RazorpayCheckout } from "../home/Enrollment"
 
 function Base() {
-  const isHome = Boolean(useMatch("/"))
+  const isRoot = Boolean(useMatch("/"))
+  const isUsa = Boolean(useMatch("/digital-product-in-usa"))
+  const isCheckout = Boolean(useMatch("/checkout"))
+  const isHome = isRoot || isUsa
   const isLesson = Boolean(useMatch("/unlock-free-lesson"))
   const isThankYou = Boolean(useMatch("/thank-you"))
   const { hash, key } = useLocation()
 
   useEffect(() => {
-    if (isHome) {
+    if (isCheckout) {
+      document.title = "Checkout | Creator Studio"
+    } else if (isHome) {
       document.title = "Creator Studio | Create and Sell Digital Products on Etsy"
     } else if (isThankYou) {
       document.title = "Thank You | Creator Studio"
@@ -27,17 +32,17 @@ function Base() {
     })
 
     return () => cancelAnimationFrame(frame)
-  }, [hash, isHome, isLesson, isThankYou, key])
+  }, [hash, isCheckout, isHome, isLesson, isThankYou, key])
 
   return (
     <div className={`min-h-dvh bg-canvas font-poppins text-ink ${isHome ? "pb-mobile-page md:pb-0" : ""}`}>
-      <Sidebar isHome={isHome} />
+      <Sidebar homePath={isUsa || isCheckout ? "/digital-product-in-usa" : "/"} />
       <div>
         <Outlet />
       </div>
       <Footer />
       {isHome && <MobileOffer className="fixed inset-x-0 bottom-0 z-30" />}
-      <RazorpayCheckout />
+      {!isUsa && !isCheckout && <RazorpayCheckout />}
     </div>
   )
 }
