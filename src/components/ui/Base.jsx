@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Outlet, useLocation, useMatch } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Sidebar, { MobileOffer } from "./Sidebar"
 import { Footer, RazorpayCheckout } from "../home/Enrollment"
 
@@ -39,13 +40,19 @@ function Base() {
 
   return (
     <div className={`min-h-dvh bg-canvas font-poppins text-ink ${isHome ? "pb-mobile-page md:pb-0" : ""}`}>
-      <Sidebar homePath={isUsa || isCheckout ? "/digital-product-in-usa" : "/"} />
+      {isThankYou ? (
+        <header className="grid min-h-[78px] place-items-center bg-black">
+          <Link to="/" aria-label="Creator Studio home">
+            <img src="/assets/logo.webp" alt="Creator Studio" width="132" height="64" />
+          </Link>
+        </header>
+      ) : <Sidebar homePath={isUsa || isCheckout ? "/digital-product-in-usa" : "/"} />}
       <div>
         <Outlet />
       </div>
-      <Footer />
+      <Footer showTagline={isThankYou} />
       {isHome && <MobileOffer className="fixed inset-x-0 bottom-0 z-30" />}
-      {!isUsa && !isCheckout && <RazorpayCheckout />}
+      {!isUsa && !isCheckout && !isThankYou && <RazorpayCheckout />}
     </div>
   )
 }
