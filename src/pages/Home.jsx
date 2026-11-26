@@ -6,6 +6,7 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
+import { usaLessonPendingKey } from "@/utils/data"
 
 export default function Home() {
   const navigate = useNavigate()
@@ -45,6 +46,14 @@ export default function Home() {
       <dialog
         id="free-lesson-dialog"
         aria-labelledby="free-lesson-dialog-title"
+        onClose={() => {
+          if (!usaLanding) return
+          try {
+            sessionStorage.removeItem(usaLessonPendingKey)
+          } catch {
+            // The dialog can close when browser storage is unavailable.
+          }
+        }}
         className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[45rem] overflow-y-auto rounded-[1.875rem] bg-white p-0 text-ink shadow-panel backdrop:bg-black/50"
       >
         <h2 id="free-lesson-dialog-title" className="sr-only">Unlock Free Lesson</h2>

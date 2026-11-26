@@ -1,5 +1,5 @@
 import { trackCheckout } from "@/utils/metaPixel"
-import { usaCheckoutUrl } from "@/utils/data"
+import { usaCheckoutUrl, usaLessonPendingKey } from "@/utils/data"
 import { useState } from "react"
 import { useMatch } from "react-router-dom"
 
@@ -55,7 +55,15 @@ export function CourseLink({ lesson = false, className = "" }) {
         className={`cursor-pointer ${classes}`}
         aria-haspopup="dialog"
         aria-controls="free-lesson-dialog"
-        onClick={() => document.getElementById("free-lesson-dialog").showModal()}
+        onClick={() => {
+          try {
+            if (usaPage) sessionStorage.setItem(usaLessonPendingKey, "true")
+            else sessionStorage.removeItem(usaLessonPendingKey)
+          } catch {
+            // The in-frame redirect still works without browser storage.
+          }
+          document.getElementById("free-lesson-dialog").showModal()
+        }}
       >
         Unlock Free Lesson
       </button>
