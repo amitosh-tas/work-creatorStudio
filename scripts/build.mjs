@@ -24,6 +24,8 @@ try {
   await writeFile(output, page)
 
   const pages = [
+    ["course", "Courses", "Learn to create and sell digital products with Creator Studio."],
+    ["course/unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
     ["digital-product-in-usa", "Create and Sell Digital Products on Etsy", "Learn to create and sell digital products with Creator Studio’s course for US learners."],
     ["checkout", "Checkout", "Review your Digital Product Mastery order and continue to secure checkout."],
     ["refund-policy", "Refund Policy", "Read the refund policy for Creator Studio’s Etsy Digital Products Course."],

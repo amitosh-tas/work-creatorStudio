@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import { Link, useMatch } from "react-router-dom"
+import { coursesPrice } from "@/utils/data"
 import { asset } from "../../utils/asset"
 import { Accordion, CourseLink, featureSplit, focusOutline, Section, SectionHeading, usaCoursePrice } from "./shared"
 
@@ -20,7 +21,7 @@ const socialProfiles = [
   { name: "YouTube", href: "https://www.youtube.com/@creatorsstudio99", icon: "youtube", badge: "bg-youtube", size: "h-5 w-6.5" },
 ]
 
-export function RazorpayCheckout() {
+export function RazorpayCheckout({ courses = false }) {
   const container = useRef(null)
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function RazorpayCheckout() {
     const form = document.createElement("form")
     const script = document.createElement("script")
     script.src = "https://checkout.razorpay.com/v1/payment-button.js"
-    script.setAttribute("data-payment_button_id", "pl_RLoGpzRlA3An1p")
+    script.setAttribute("data-payment_button_id", courses ? "pl_TjKlKJXERGp5JW" : "pl_RLoGpzRlA3An1p")
     script.async = true
     script.onerror = () => {
       host.dataset.loadFailed = "true"
@@ -41,13 +42,15 @@ export function RazorpayCheckout() {
       delete host.dataset.loadFailed
       form.remove()
     }
-  }, [])
+  }, [courses])
 
   return <div id="razorpay-checkout" ref={container} hidden />
 }
 
 export function Pricing() {
   const usaLanding = useMatch("/digital-product-in-usa")
+  const coursesLanding = useMatch("/course")
+  const price = coursesLanding ? coursesPrice : usaLanding ? usaCoursePrice : "Starting at ₹699/-"
   return (
     <Section id="pricing">
       <SectionHeading label="Pricing" title="Ready to Turn Your Ideas Into Digital Products?" />
@@ -60,7 +63,7 @@ export function Pricing() {
           <h3 className="mb-2.5 text-3xl font-bold tracking-heading">Description</h3>
           <p className="text-muted">Join the course and learn how to create, launch, and grow a digital product business using beginner-friendly tools like Canva and AI.</p>
           <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-            <strong className="text-xl">{usaLanding ? usaCoursePrice : "Starting at ₹699/-"}</strong>
+            <strong className="text-xl">{price}</strong>
             <CourseLink />
           </div>
         </div>

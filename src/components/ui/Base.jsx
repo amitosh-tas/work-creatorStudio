@@ -9,13 +9,17 @@ function Base() {
   const isUsaLanding = Boolean(useMatch("/digital-product-in-usa"))
   const isUsaLesson = Boolean(useMatch("/digital-product-in-usa/unlock-free-lesson"))
   const isUsa = isUsaLanding || isUsaLesson
+  const isCoursesLanding = Boolean(useMatch("/course"))
+  const isCoursesLesson = Boolean(useMatch("/course/unlock-free-lesson"))
+  const isCourses = isCoursesLanding || isCoursesLesson
   const isCheckout = Boolean(useMatch("/checkout"))
-  const isHome = isRoot || isUsaLanding
+  const isHome = isRoot || isUsaLanding || isCoursesLanding
   const isRootLesson = Boolean(useMatch("/unlock-free-lesson"))
-  const isLesson = isRootLesson || isUsaLesson
+  const isLesson = isRootLesson || isUsaLesson || isCoursesLesson
   const isDefaultThankYou = Boolean(useMatch("/thank-you"))
   const isUsaThankYou = Boolean(useMatch("/digital-product-in-usa/thank-you"))
   const isThankYou = isDefaultThankYou || isUsaThankYou
+  const homePath = isCourses ? "/course" : isUsa || isCheckout ? "/digital-product-in-usa" : "/"
   const { hash, key } = useLocation()
 
   useEffect(() => {
@@ -48,13 +52,13 @@ function Base() {
             <img src="/assets/logo.webp" alt="Creator Studio" width="132" height="64" />
           </Link>
         </header>
-      ) : <Sidebar homePath={isUsa || isCheckout ? "/digital-product-in-usa" : "/"} />}
+      ) : <Sidebar homePath={homePath} />}
       <div>
         <Outlet />
       </div>
       <Footer showTagline={isThankYou} />
       {isHome && <MobileOffer className="fixed inset-x-0 bottom-0 z-30" />}
-      {!isUsa && !isCheckout && !isThankYou && <RazorpayCheckout />}
+      {!isUsa && !isCheckout && !isThankYou && <RazorpayCheckout key={homePath} courses={isCourses} />}
     </div>
   )
 }

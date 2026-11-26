@@ -1,5 +1,5 @@
 import { trackCheckout } from "@/utils/metaPixel"
-import { usaCheckoutUrl, usaLessonPendingKey, usaPurchaseAmount } from "@/utils/data"
+import { lessonSourceKey, usaCheckoutUrl, usaPurchaseAmount } from "@/utils/data"
 import { useState } from "react"
 import { useMatch } from "react-router-dom"
 
@@ -44,6 +44,7 @@ export function SectionHeading({ label, title, description, pill = false, align 
 
 export function CourseLink({ lesson = false, className = "" }) {
   const usaPage = useMatch("/digital-product-in-usa/*")
+  const coursesPage = useMatch("/course/*")
   const [checkoutMessage, setCheckoutMessage] = useState("")
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
@@ -57,8 +58,9 @@ export function CourseLink({ lesson = false, className = "" }) {
         aria-controls="free-lesson-dialog"
         onClick={() => {
           try {
-            if (usaPage) sessionStorage.setItem(usaLessonPendingKey, "true")
-            else sessionStorage.removeItem(usaLessonPendingKey)
+            const lessonSource = usaPage?.pathnameBase || coursesPage?.pathnameBase
+            if (lessonSource) sessionStorage.setItem(lessonSourceKey, lessonSource)
+            else sessionStorage.removeItem(lessonSourceKey)
           } catch {
             // The in-frame redirect still works without browser storage.
           }

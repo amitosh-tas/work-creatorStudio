@@ -6,11 +6,14 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
-import { usaLessonPendingKey } from "@/utils/data"
+import { lessonSourceKey } from "@/utils/data"
 
 export default function Home() {
   const navigate = useNavigate()
   const usaLanding = useMatch("/digital-product-in-usa")
+  const coursesLanding = useMatch("/course")
+  const landingPath = usaLanding?.pathnameBase || coursesLanding?.pathnameBase || ""
+  const formId = coursesLanding ? "qEPpF7JSKHMUGZjXt3kI" : usaLanding ? "CoqvdkS7JHdc528ZTQaD" : "d1dBNxJoHnIVzIJis765"
   const lessonUnlocked = useRef(false)
 
   useEffect(() => {
@@ -47,9 +50,9 @@ export default function Home() {
         id="free-lesson-dialog"
         aria-labelledby="free-lesson-dialog-title"
         onClose={() => {
-          if (!usaLanding) return
+          if (!landingPath) return
           try {
-            sessionStorage.removeItem(usaLessonPendingKey)
+            sessionStorage.removeItem(lessonSourceKey)
           } catch {
             // The dialog can close when browser storage is unavailable.
           }
@@ -63,8 +66,8 @@ export default function Home() {
           </button>
         </form>
         <iframe
-          src="https://api.leadconnectorhq.com/widget/form/d1dBNxJoHnIVzIJis765"
-          title="Etsy Course Form"
+          src={`https://api.leadconnectorhq.com/widget/form/${formId}`}
+          title={coursesLanding ? "Etsy Course Form - Course" : usaLanding ? "Etsy Course Form - USA" : "Etsy Course Form"}
           loading="lazy"
           className="block h-128 w-full border-0"
           onLoad={(event) => {
@@ -77,9 +80,10 @@ export default function Home() {
               // The form remains cross-origin until it redirects back to this site.
               return
             }
-            if (pathname === "/unlock-free-lesson" || pathname === "/unlock-free-lesson/") {
+            const lessonPath = pathname.replace(/\/$/, "")
+            if (lessonPath === "/unlock-free-lesson" || lessonPath === `${landingPath}/unlock-free-lesson`) {
               lessonUnlocked.current = true
-              navigate(usaLanding ? "/digital-product-in-usa/unlock-free-lesson/" : "/unlock-free-lesson/")
+              navigate(`${landingPath}/unlock-free-lesson/`)
             }
           }}
         />

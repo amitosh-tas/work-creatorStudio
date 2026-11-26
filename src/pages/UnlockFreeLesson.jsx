@@ -4,27 +4,27 @@ import { useMatch, useNavigate } from "react-router-dom"
 import HLSPlayer from "../components/home/HLSPlayer"
 import { CourseLink } from "../components/home/shared"
 import { trackLead } from "@/utils/metaPixel"
-import { usaLessonPendingKey } from "@/utils/data"
+import { lessonSourceKey } from "@/utils/data"
 
 const lessonVideo = "https://content.apisystem.tech/hls/medias/vjZH6eaaO1YqAx3rpmKk/media/transcoded_videos/cts-a72e06a84132e322_,360,480,720,1080,p.mp4.urlset/master.m3u8"
 
 export default function UnlockFreeLesson() {
-  const usaLesson = Boolean(useMatch("/digital-product-in-usa/unlock-free-lesson"))
+  const sharedLesson = Boolean(useMatch("/unlock-free-lesson"))
   const navigate = useNavigate()
 
   useEffect(() => {
     // Home opens the lesson in the main window when the form redirects inside its iframe.
     if (window.self !== window.top) return
 
-    let usaLessonPending = false
+    let lessonSource
     try {
-      usaLessonPending = sessionStorage.getItem(usaLessonPendingKey) === "true"
-      if (usaLesson) sessionStorage.removeItem(usaLessonPendingKey)
+      lessonSource = sessionStorage.getItem(lessonSourceKey)
+      if (!sharedLesson) sessionStorage.removeItem(lessonSourceKey)
     } catch {
       // The explicit lesson route still works without browser storage.
     }
-    if (usaLessonPending && !usaLesson) {
-      navigate("/digital-product-in-usa/unlock-free-lesson/" + window.location.search + window.location.hash, { replace: true })
+    if (sharedLesson && (lessonSource === "/digital-product-in-usa" || lessonSource === "/course")) {
+      navigate(lessonSource + "/unlock-free-lesson/" + window.location.search + window.location.hash, { replace: true })
       return
     }
 
@@ -33,7 +33,7 @@ export default function UnlockFreeLesson() {
 
     trackLead()
     window.history.replaceState({ ...window.history.state, lessonLeadTracked: true }, "")
-  }, [navigate, usaLesson])
+  }, [navigate, sharedLesson])
 
   return (
     <main className="bg-cream px-4 py-10 text-center sm:px-6 md:py-16">
