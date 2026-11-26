@@ -1,6 +1,7 @@
 import { trackCheckout } from "@/utils/metaPixel"
 import { lessonSourceKey, usaCheckoutUrl, usaPurchaseAmount } from "@/utils/data"
-import { useState } from "react"
+import { LoaderCircle } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import { useMatch } from "react-router-dom"
 
 export const usaCoursePrice = `$${usaPurchaseAmount.toFixed(2)}`
@@ -11,6 +12,30 @@ export const featureTitle = "text-feature-title leading-feature font-bold tracki
 export const focusOutline = "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-focus"
 export const courseButton = "inline-flex min-h-14.5 min-w-47.5 items-center justify-center border-2 px-5 py-2.5 text-center font-semibold text-ink"
 export const goldButton = "relative isolate overflow-hidden rounded-action border-transparent bg-course-action motion-safe:before:pointer-events-none motion-safe:before:absolute motion-safe:before:inset-y-0 motion-safe:before:left-0 motion-safe:before:-z-10 motion-safe:before:w-1/3 motion-safe:before:animate-join-shimmer motion-safe:before:bg-join-shimmer"
+
+export function LoadingLabel({ children }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
+      {children}
+    </span>
+  )
+}
+
+function waitForCheckout(getResult, signal) {
+  return new Promise((resolve) => {
+    const deadline = Date.now() + 8000
+    function check() {
+      const result = !signal.aborted && getResult()
+      if (result || signal.aborted || Date.now() >= deadline) {
+        resolve(result)
+        return
+      }
+      window.setTimeout(check, 100)
+    }
+    check()
+  })
+}
 
 const sectionTones = {
   blue: "bg-mist",
@@ -47,6 +72,19 @@ export function CourseLink({ lesson = false, className = "" }) {
   const usaLesson = useMatch("/unlock-free-lesson-usa")
   const coursesPage = useMatch("/course/*")
   const [checkoutMessage, setCheckoutMessage] = useState("")
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+  const checkoutAttempt = useRef(null)
+  const isUsa = Boolean(usaPage || usaLesson)
+
+  useEffect(() => {
+    if (lesson) return
+    const resetLoading = () => setCheckoutLoading(false)
+    if (isUsa) window.addEventListener("pageshow", resetLoading)
+    return () => {
+      if (isUsa) window.removeEventListener("pageshow", resetLoading)
+      checkoutAttempt.current?.abort()
+    }
+  }, [isUsa, lesson])
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
 
@@ -73,8 +111,23 @@ export function CourseLink({ lesson = false, className = "" }) {
     )
   }
 
-  if (usaPage || usaLesson) {
-    return <a className={classes} href={usaCheckoutUrl} onClick={trackCheckout}>Join Now</a>
+  if (isUsa) {
+    return (
+      <a className={classes} href={usaCheckoutUrl} aria-busy={checkoutLoading} onClick={(event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+          trackCheckout()
+          return
+        }
+        if (checkoutLoading) {
+          event.preventDefault()
+          return
+        }
+        setCheckoutLoading(true)
+        trackCheckout()
+      }}>
+        {checkoutLoading ? <LoadingLabel>Opening checkout…</LoadingLabel> : "Join Now"}
+      </a>
+    )
   }
 
   return (
@@ -83,24 +136,50 @@ export function CourseLink({ lesson = false, className = "" }) {
         type="button"
         className={`cursor-pointer ${classes}`}
         aria-haspopup="dialog"
-        onClick={(event) => {
-          const checkout = document.getElementById("razorpay-checkout")
-          const paymentButton = checkout?.querySelector(".razorpay-payment-button .PaymentButton, button, input[type='submit']")
-          if (!paymentButton) {
-            setCheckoutMessage(checkout?.dataset.loadFailed
-              ? "Checkout couldn’t load. Refresh the page to try again."
-              : "Checkout is loading. Please try again in a moment.")
-            return
-          }
-
+        disabled={checkoutLoading}
+        aria-busy={checkoutLoading}
+        onClick={async (event) => {
+          if (checkoutAttempt.current) return
+          const dialog = event.currentTarget.closest("dialog")
+          const controller = new AbortController()
+          checkoutAttempt.current = controller
+          setCheckoutLoading(true)
           setCheckoutMessage("")
-          event.currentTarget.closest("dialog")?.close()
 
-          trackCheckout()
-          paymentButton.click()
+          const checkout = document.getElementById("razorpay-checkout")
+          const findPaymentButton = () => checkout?.querySelector(".razorpay-payment-button .PaymentButton, button, input[type='submit']")
+          try {
+            const paymentButton = findPaymentButton() || await waitForCheckout(
+              () => checkout?.dataset.loadFailed ? "failed" : findPaymentButton(),
+              controller.signal,
+            )
+            if (controller.signal.aborted) return
+            if (!paymentButton || paymentButton === "failed") {
+              setCheckoutMessage("Checkout couldn’t load. Please try again.")
+              return
+            }
+
+            const wasDialogOpen = dialog?.open
+            if (wasDialogOpen) dialog.close()
+            trackCheckout()
+            paymentButton.click()
+            const checkoutFrame = await waitForCheckout(
+              () => [...document.querySelectorAll("iframe.razorpay-checkout-frame, .razorpay-container iframe")]
+                .find((frame) => frame.getClientRects().length && getComputedStyle(frame).visibility === "visible"),
+              controller.signal,
+            )
+            if (controller.signal.aborted) return
+            if (!checkoutFrame) {
+              if (wasDialogOpen && !dialog.open) dialog.showModal()
+              setCheckoutMessage("Checkout didn’t open. Please try again.")
+            }
+          } finally {
+            checkoutAttempt.current = null
+            if (!controller.signal.aborted) setCheckoutLoading(false)
+          }
         }}
       >
-        Join Now
+        {checkoutLoading ? <LoadingLabel>Opening checkout…</LoadingLabel> : "Join Now"}
       </button>
       {checkoutMessage && <span role="status" className="block text-sm text-muted">{checkoutMessage}</span>}
     </>

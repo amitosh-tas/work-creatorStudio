@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { X } from "lucide-react"
 import { useMatch, useNavigate } from "react-router-dom"
 import Hero from "../components/home/Hero"
@@ -6,6 +6,7 @@ import { CourseOverview, ProductExamples } from "../components/home/CourseOvervi
 import { BusinessModel } from "../components/home/BusinessModel"
 import { CourseFit, Curriculum, Instructor } from "../components/home/CourseDetails"
 import { FAQ, Pricing, Testimonials } from "../components/home/Enrollment"
+import { LoadingLabel } from "../components/home/shared"
 import { lessonSourceKey } from "@/utils/data"
 
 export default function Home() {
@@ -16,6 +17,8 @@ export default function Home() {
   const destination = coursesLanding ? "/unlock-free-lesson-course" : usaLanding ? "/unlock-free-lesson-usa" : "/unlock-free-lesson"
   const formId = coursesLanding ? "qEPpF7JSKHMUGZjXt3kI" : usaLanding ? "CoqvdkS7JHdc528ZTQaD" : "d1dBNxJoHnIVzIJis765"
   const lessonUnlocked = useRef(false)
+  const [loadedFormId, setLoadedFormId] = useState(null)
+  const formLoading = loadedFormId !== formId
 
   useEffect(() => {
     const controller = new AbortController()
@@ -66,28 +69,38 @@ export default function Home() {
             <X size={20} aria-hidden="true" />
           </button>
         </form>
-        <iframe
-          src={`https://api.leadconnectorhq.com/widget/form/${formId}`}
-          title={coursesLanding ? "Etsy Course Form - Course" : usaLanding ? "Etsy Course Form - USA" : "Etsy Course Form"}
-          loading="lazy"
-          className="block h-128 w-full border-0"
-          onLoad={(event) => {
-            if (lessonUnlocked.current) return
+        <div className="relative">
+          {formLoading && (
+            <div role="status" className="pointer-events-none absolute inset-0 grid place-items-center text-sm text-muted">
+              <LoadingLabel>Loading the free lesson form…</LoadingLabel>
+            </div>
+          )}
+          <iframe
+            key={formId}
+            src={`https://api.leadconnectorhq.com/widget/form/${formId}`}
+            title={coursesLanding ? "Etsy Course Form - Course" : usaLanding ? "Etsy Course Form - USA" : "Etsy Course Form"}
+            loading="lazy"
+            inert={formLoading}
+            className={`block h-128 w-full border-0 ${formLoading ? "opacity-0" : ""}`}
+            onLoad={(event) => {
+              if (lessonUnlocked.current) return
 
-            let pathname
-            try {
-              pathname = event.currentTarget.contentWindow.location.pathname
-            } catch {
-              // The form remains cross-origin until it redirects back to this site.
-              return
-            }
-            const lessonPath = pathname.replace(/\/$/, "")
-            if (lessonPath === "/unlock-free-lesson" || lessonPath === destination) {
-              lessonUnlocked.current = true
-              navigate(`${destination}/`)
-            }
-          }}
-        />
+              let pathname
+              try {
+                pathname = event.currentTarget.contentWindow.location.pathname
+              } catch {
+                // The form remains cross-origin until it redirects back to this site.
+                setLoadedFormId(formId)
+                return
+              }
+              const lessonPath = pathname.replace(/\/$/, "")
+              if (lessonPath === "/unlock-free-lesson" || lessonPath === destination) {
+                lessonUnlocked.current = true
+                navigate(`${destination}/`)
+              }
+            }}
+          />
+        </div>
       </dialog>
     </main>
   )
