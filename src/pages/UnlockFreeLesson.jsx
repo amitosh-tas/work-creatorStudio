@@ -1,10 +1,17 @@
 import { Sparkles } from "lucide-react"
 import HLSPlayer from "../components/home/HLSPlayer"
 import { CourseLink } from "../components/home/shared"
+import { useEffect } from "react"
+import { trackLead } from "@/utils/metaPixel"
 
 const lessonVideo = "https://content.apisystem.tech/hls/medias/vjZH6eaaO1YqAx3rpmKk/media/transcoded_videos/cts-a72e06a84132e322_,360,480,720,1080,p.mp4.urlset/master.m3u8"
 
 export default function UnlockFreeLesson() {
+
+  useEffect(()=>{
+    trackLead();
+  }, [])
+
   return (
     <main className="bg-cream px-4 py-10 text-center sm:px-6 md:py-16">
       <div className="mx-auto max-w-280">
