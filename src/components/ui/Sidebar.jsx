@@ -17,13 +17,13 @@ function NavigationItems({ homePath }) {
 }
 
 export function MobileOffer({ className = "" }) {
-  const usaLanding = useMatch("/digital-product-in-usa")
+  const usaPage = useMatch("/digital-product-in-usa/*")
   return (
     <aside aria-label="Course offer" className={`min-h-22 border-t border-black/15 bg-canvas px-4 pt-3 pb-mobile-offer text-ink shadow-offer md:hidden ${className}`}>
       <div className="mx-auto grid max-w-hero-stack grid-cols-2 items-center gap-2 sm:gap-4">
         <p className="text-center text-xs sm:text-sm">
           Limited Time Offer
-          <strong className="mt-0.5 block text-lg font-bold">{usaLanding ? usaCoursePrice : "₹699"}</strong>
+          <strong className="mt-0.5 block text-lg font-bold">{usaPage ? usaCoursePrice : "₹699"}</strong>
         </p>
         <CourseLink className="w-full max-w-43 justify-self-center max-md:min-h-12.5 max-md:min-w-0 max-md:px-3 sm:text-lg" />
       </div>

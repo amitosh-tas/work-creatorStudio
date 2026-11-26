@@ -1,6 +1,7 @@
 import { trackCheckout } from "@/utils/metaPixel"
+import { usaCheckoutUrl } from "@/utils/data"
 import { useState } from "react"
-import { Link, useMatch } from "react-router-dom"
+import { useMatch } from "react-router-dom"
 
 export const usaCoursePrice = "$149.00"
 
@@ -42,8 +43,7 @@ export function SectionHeading({ label, title, description, pill = false, align 
 }
 
 export function CourseLink({ lesson = false, className = "" }) {
-  const usaLanding = useMatch("/digital-product-in-usa")
-  const usaCheckout = useMatch("/checkout")
+  const usaPage = useMatch("/digital-product-in-usa/*")
   const [checkoutMessage, setCheckoutMessage] = useState("")
   const variant = lesson ? "rounded-control border-ink bg-transparent" : goldButton
   const classes = `${courseButton} ${variant} ${focusOutline} hover:brightness-95 motion-safe:transition motion-safe:duration-150 motion-safe:hover:-translate-y-0.5 motion-safe:active:scale-97 ${className}`
@@ -62,8 +62,8 @@ export function CourseLink({ lesson = false, className = "" }) {
     )
   }
 
-  if (usaLanding || usaCheckout) {
-    return <Link className={classes} to="/checkout" onClick={trackCheckout}>Join Now</Link>
+  if (usaPage) {
+    return <a className={classes} href={usaCheckoutUrl} onClick={trackCheckout}>Join Now</a>
   }
 
   return (

@@ -5,10 +5,13 @@ import { Footer, RazorpayCheckout } from "../home/Enrollment"
 
 function Base() {
   const isRoot = Boolean(useMatch("/"))
-  const isUsa = Boolean(useMatch("/digital-product-in-usa"))
+  const isUsaLanding = Boolean(useMatch("/digital-product-in-usa"))
+  const isUsaLesson = Boolean(useMatch("/digital-product-in-usa/unlock-free-lesson"))
+  const isUsa = isUsaLanding || isUsaLesson
   const isCheckout = Boolean(useMatch("/checkout"))
-  const isHome = isRoot || isUsa
-  const isLesson = Boolean(useMatch("/unlock-free-lesson"))
+  const isHome = isRoot || isUsaLanding
+  const isRootLesson = Boolean(useMatch("/unlock-free-lesson"))
+  const isLesson = isRootLesson || isUsaLesson
   const isThankYou = Boolean(useMatch("/thank-you"))
   const { hash, key } = useLocation()
 

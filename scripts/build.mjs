@@ -28,6 +28,7 @@ try {
     ["checkout", "Checkout", "Review your Digital Product Mastery order and continue to secure checkout."],
     ["refund-policy", "Refund Policy", "Read the refund policy for Creator Studio’s Etsy Digital Products Course."],
     ["unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
+    ["digital-product-in-usa/unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
     ["thank-you", "Thank You", "Temporary Creator Studio purchase tracking test page."],
   ]
 
