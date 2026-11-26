@@ -10,7 +10,8 @@ export default function ThankYou() {
     if (window.self !== window.top || window.history.state?.testPurchaseTracked) return
     if (typeof window.fbq !== "function") return
 
-    trackPurchase(testPurchaseAmount)
+    const paymentId = new URLSearchParams(window.location.search).get("razorpay_payment_id")
+    trackPurchase(testPurchaseAmount, paymentId)
     window.history.replaceState({ ...window.history.state, testPurchaseTracked: true }, "")
   }, [])
 
