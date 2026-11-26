@@ -10,7 +10,7 @@ function Base() {
   const isUsaLesson = Boolean(useMatch("/digital-product-in-usa/unlock-free-lesson"))
   const isUsa = isUsaLanding || isUsaLesson
   const isCoursesLanding = Boolean(useMatch("/course"))
-  const isCoursesLesson = Boolean(useMatch("/course/unlock-free-lesson"))
+  const isCoursesLesson = Boolean(useMatch("/unlock-free-lesson-course"))
   const isCourses = isCoursesLanding || isCoursesLesson
   const isCheckout = Boolean(useMatch("/checkout"))
   const isHome = isRoot || isUsaLanding || isCoursesLanding

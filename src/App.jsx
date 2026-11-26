@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Base/>} >
           <Route index element={<Home />} />
           <Route path="course" element={<Home />} />
-          <Route path="course/unlock-free-lesson" element={<UnlockFreeLesson />} />
+          <Route path="unlock-free-lesson-course" element={<UnlockFreeLesson />} />
           <Route path="digital-product-in-usa" element={<Home />} />
           <Route path="digital-product-in-usa/unlock-free-lesson" element={<UnlockFreeLesson />} />
           <Route path="digital-product-in-usa/thank-you" element={<ThankYou />} />

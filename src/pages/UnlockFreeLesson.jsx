@@ -24,7 +24,10 @@ export default function UnlockFreeLesson() {
       // The explicit lesson route still works without browser storage.
     }
     if (sharedLesson && (lessonSource === "/digital-product-in-usa" || lessonSource === "/course")) {
-      navigate(lessonSource + "/unlock-free-lesson/" + window.location.search + window.location.hash, { replace: true })
+      const destination = lessonSource === "/course"
+        ? "/unlock-free-lesson-course/"
+        : "/digital-product-in-usa/unlock-free-lesson/"
+      navigate(destination + window.location.search + window.location.hash, { replace: true })
       return
     }
 

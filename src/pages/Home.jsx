@@ -13,6 +13,7 @@ export default function Home() {
   const usaLanding = useMatch("/digital-product-in-usa")
   const coursesLanding = useMatch("/course")
   const landingPath = usaLanding?.pathnameBase || coursesLanding?.pathnameBase || ""
+  const destination = coursesLanding ? "/unlock-free-lesson-course" : `${landingPath}/unlock-free-lesson`
   const formId = coursesLanding ? "qEPpF7JSKHMUGZjXt3kI" : usaLanding ? "CoqvdkS7JHdc528ZTQaD" : "d1dBNxJoHnIVzIJis765"
   const lessonUnlocked = useRef(false)
 
@@ -81,9 +82,9 @@ export default function Home() {
               return
             }
             const lessonPath = pathname.replace(/\/$/, "")
-            if (lessonPath === "/unlock-free-lesson" || lessonPath === `${landingPath}/unlock-free-lesson`) {
+            if (lessonPath === "/unlock-free-lesson" || lessonPath === destination) {
               lessonUnlocked.current = true
-              navigate(`${landingPath}/unlock-free-lesson/`)
+              navigate(`${destination}/`)
             }
           }}
         />
