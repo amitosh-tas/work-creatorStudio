@@ -1,9 +1,9 @@
 import { trackCheckout } from "@/utils/metaPixel"
-import { usaCheckoutUrl, usaLessonPendingKey } from "@/utils/data"
+import { usaCheckoutUrl, usaLessonPendingKey, usaPurchaseAmount } from "@/utils/data"
 import { useState } from "react"
 import { useMatch } from "react-router-dom"
 
-export const usaCoursePrice = "$149.00"
+export const usaCoursePrice = `$${usaPurchaseAmount.toFixed(2)}`
 
 export const landingContainer = "mx-auto w-full max-w-landing"
 export const featureSplit = "grid items-start gap-5.5 md:grid-cols-2 md:gap-9"

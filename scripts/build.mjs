@@ -30,6 +30,7 @@ try {
     ["unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
     ["digital-product-in-usa/unlock-free-lesson", "Unlock Free Lesson", "Watch a free lesson from Creator Studio’s Etsy Digital Products Course."],
     ["thank-you", "Thank You", "Temporary Creator Studio purchase tracking test page."],
+    ["digital-product-in-usa/thank-you", "Thank You", "Welcome to Creator Studio’s Digital Product Mastery course."],
   ]
 
   for (const [path, title, description] of pages) {
@@ -40,7 +41,7 @@ try {
       .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
 
     await mkdir(directory, { recursive: true })
-    const pageHtml = path === "thank-you"
+    const pageHtml = path.endsWith("thank-you")
       ? html.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>')
       : html
     await writeFile(new URL("index.html", directory), pageHtml)

@@ -13,7 +13,7 @@ export const trackCheckout = () => {
   window.fbq?.('track', 'InitiateCheckout');
 };
 
-export const trackPurchase = (amount, paymentId) => {
+export const trackPurchase = (amount, paymentId, currency = 'INR') => {
   if (typeof window.fbq !== 'function') return;
 
   const storageKey = paymentId ? `${purchaseTrackedKey}:${paymentId}` : purchaseTrackedKey;
@@ -27,7 +27,7 @@ export const trackPurchase = (amount, paymentId) => {
 
   const purchase = {
     value: amount,
-    currency: 'INR',
+    currency,
   };
   if (paymentId) {
     window.fbq('track', 'Purchase', purchase, { eventID: paymentId });

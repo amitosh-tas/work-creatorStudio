@@ -1,20 +1,24 @@
 import { useEffect } from "react"
+import { useMatch } from "react-router-dom"
 import HLSPlayer from "../components/home/HLSPlayer"
 import { trackPurchase } from "@/utils/metaPixel"
+import { usaPurchaseAmount } from "@/utils/data"
 
 const testPurchaseAmount = 699
 const welcomeVideo = "https://content.apisystem.tech/hls/medias/vjZH6eaaO1YqAx3rpmKk/media/transcoded_videos/cts-9d13f67941ab4045_,360,480,720,1080,p.mp4.urlset/master.m3u8"
 const communityInvite = "https://chat.whatsapp.com/Gg5qmBOQoMJ4JCxyIDr6hj?mode=gi_t"
 
 export default function ThankYou() {
+  const isUsa = Boolean(useMatch("/digital-product-in-usa/thank-you"))
+
   useEffect(() => {
     if (window.self !== window.top || window.history.state?.testPurchaseTracked) return
     if (typeof window.fbq !== "function") return
 
     const paymentId = new URLSearchParams(window.location.search).get("razorpay_payment_id")
-    trackPurchase(testPurchaseAmount, paymentId)
+    trackPurchase(isUsa ? usaPurchaseAmount : testPurchaseAmount, paymentId, isUsa ? "USD" : "INR")
     window.history.replaceState({ ...window.history.state, testPurchaseTracked: true }, "")
-  }, [])
+  }, [isUsa])
 
   return (
     <main className="bg-[#fff0d8] bg-[radial-gradient(ellipse_at_12%_16%,#ffe2a0,transparent_42%),radial-gradient(ellipse_at_48%_65%,#fff9e9,transparent_55%),radial-gradient(ellipse_at_80%_10%,#fff8ee,transparent_42%),linear-gradient(125deg,#fff4e2,#ffebaf_64%,#ffe6d7)] px-5 py-14 text-center text-black md:px-8 md:py-24 lg:pt-28 lg:pb-32">

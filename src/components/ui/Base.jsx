@@ -13,7 +13,9 @@ function Base() {
   const isHome = isRoot || isUsaLanding
   const isRootLesson = Boolean(useMatch("/unlock-free-lesson"))
   const isLesson = isRootLesson || isUsaLesson
-  const isThankYou = Boolean(useMatch("/thank-you"))
+  const isDefaultThankYou = Boolean(useMatch("/thank-you"))
+  const isUsaThankYou = Boolean(useMatch("/digital-product-in-usa/thank-you"))
+  const isThankYou = isDefaultThankYou || isUsaThankYou
   const { hash, key } = useLocation()
 
   useEffect(() => {
