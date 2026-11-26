@@ -181,7 +181,11 @@ export function CourseLink({ lesson = false, className = "" }) {
       >
         {checkoutLoading ? <LoadingLabel>Opening checkout…</LoadingLabel> : "Join Now"}
       </button>
-      {checkoutMessage && <span role="status" className="block text-sm text-muted">{checkoutMessage}</span>}
+      {checkoutMessage && (
+        <p role="alert" className="order-last col-span-full mt-2 basis-full text-sm">
+          {checkoutMessage}
+        </p>
+      )}
     </>
   )
 }
